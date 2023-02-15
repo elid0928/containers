@@ -1,9 +1,0 @@
-{
-    "contour-operator": {
-        "arch": "amd64",
-        "digest": "9369bdfbf3af1084675f102b78b6f7c9d88cec938ef0797e3f2e810a60392b2c",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "1.22.1-4"
-    }
-}

@@ -1,9 +1,0 @@
-{
-    "prometheus": {
-        "arch": "amd64",
-        "digest": "667f5676c1c4b5194466ac5bbf38c3547c840ea665e86b8c093bb5dd557bd0e3",
-        "distro": "debian-11",
-        "type": "NAMI",
-        "version": "2.42.0-0"
-    }
-}
