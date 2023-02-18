@@ -8,12 +8,12 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load Redis Sentinel environment variables
-. /opt/bitnami/scripts/redis-sentinel-env.sh
+. /opt/pacloud/scripts/redis-sentinel-env.sh
 
 # Load libraries
-. /opt/bitnami/scripts/libredissentinel.sh
-. /opt/bitnami/scripts/libfs.sh
-. /opt/bitnami/scripts/liblog.sh
+. /opt/pacloud/scripts/libredissentinel.sh
+. /opt/pacloud/scripts/libfs.sh
+. /opt/pacloud/scripts/liblog.sh
 
 # Ensure non-root user has write permissions on a set of directories
 for dir in "$REDIS_SENTINEL_BASE_DIR" "$REDIS_SENTINEL_CONF_DIR" "$REDIS_SENTINEL_LOG_DIR" "$REDIS_SENTINEL_TMP_DIR" "$REDIS_SENTINEL_VOLUME_DIR" "${REDIS_SENTINEL_VOLUME_DIR}/conf"; do

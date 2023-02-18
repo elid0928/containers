@@ -5,7 +5,7 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /opt/bitnami/scripts/liblog.sh
+. /opt/pacloud/scripts/liblog.sh
 
 # Functions
 

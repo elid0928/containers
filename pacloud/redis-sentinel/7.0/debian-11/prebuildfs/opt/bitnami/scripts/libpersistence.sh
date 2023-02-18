@@ -1,23 +1,23 @@
 #!/bin/bash
 #
-# Bitnami persistence library
+# Pacloud persistence library
 # Used for bringing persistence capabilities to applications that don't have clear separation of data and logic
 
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /opt/bitnami/scripts/libfs.sh
-. /opt/bitnami/scripts/libos.sh
-. /opt/bitnami/scripts/liblog.sh
-. /opt/bitnami/scripts/libversion.sh
+. /opt/pacloud/scripts/libfs.sh
+. /opt/pacloud/scripts/libos.sh
+. /opt/pacloud/scripts/liblog.sh
+. /opt/pacloud/scripts/libversion.sh
 
 # Functions
 
 ########################
 # Persist an application directory
 # Globals:
-#   BITNAMI_ROOT_DIR
-#   BITNAMI_VOLUME_DIR
+#   PACLOUD_ROOT_DIR
+#   PACLOUD_VOLUME_DIR
 # Arguments:
 #   $1 - App folder name
 #   $2 - List of app files to persist
@@ -28,8 +28,8 @@ persist_app() {
     local -r app="${1:?missing app}"
     local -a files_to_restore
     read -r -a files_to_persist <<< "$(tr ',;:' ' ' <<< "$2")"
-    local -r install_dir="${BITNAMI_ROOT_DIR}/${app}"
-    local -r persist_dir="${BITNAMI_VOLUME_DIR}/${app}"
+    local -r install_dir="${PACLOUD_ROOT_DIR}/${app}"
+    local -r persist_dir="${PACLOUD_VOLUME_DIR}/${app}"
     # Persist the individual files
     if [[ "${#files_to_persist[@]}" -le 0 ]]; then
         warn "No files are configured to be persisted"
@@ -71,8 +71,8 @@ persist_app() {
 ########################
 # Restore a persisted application directory
 # Globals:
-#   BITNAMI_ROOT_DIR
-#   BITNAMI_VOLUME_DIR
+#   PACLOUD_ROOT_DIR
+#   PACLOUD_VOLUME_DIR
 #   FORCE_MAJOR_UPGRADE
 # Arguments:
 #   $1 - App folder name
@@ -84,8 +84,8 @@ restore_persisted_app() {
     local -r app="${1:?missing app}"
     local -a files_to_restore
     read -r -a files_to_restore <<< "$(tr ',;:' ' ' <<< "$2")"
-    local -r install_dir="${BITNAMI_ROOT_DIR}/${app}"
-    local -r persist_dir="${BITNAMI_VOLUME_DIR}/${app}"
+    local -r install_dir="${PACLOUD_ROOT_DIR}/${app}"
+    local -r persist_dir="${PACLOUD_VOLUME_DIR}/${app}"
     # Restore the individual persisted files
     if [[ "${#files_to_restore[@]}" -le 0 ]]; then
         warn "No persisted files are configured to be restored"
@@ -105,7 +105,7 @@ restore_persisted_app() {
 ########################
 # Check if an application directory was already persisted
 # Globals:
-#   BITNAMI_VOLUME_DIR
+#   PACLOUD_VOLUME_DIR
 # Arguments:
 #   $1 - App folder name
 # Returns:
@@ -113,7 +113,7 @@ restore_persisted_app() {
 #########################
 is_app_initialized() {
     local -r app="${1:?missing app}"
-    local -r persist_dir="${BITNAMI_VOLUME_DIR}/${app}"
+    local -r persist_dir="${PACLOUD_VOLUME_DIR}/${app}"
     if ! is_mounted_dir_empty "$persist_dir"; then
         true
     else

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Bitnami PostgreSQL setup
+# Pacloud PostgreSQL setup
 
 # shellcheck disable=SC1091
 
@@ -9,13 +9,13 @@ set -o nounset
 set -o pipefail
 
 # Load libraries
-. /opt/bitnami/scripts/liblog.sh
-. /opt/bitnami/scripts/libos.sh
-. /opt/bitnami/scripts/libvalidations.sh
-. /opt/bitnami/scripts/libpostgresql.sh
+. /opt/pacloud/scripts/liblog.sh
+. /opt/pacloud/scripts/libos.sh
+. /opt/pacloud/scripts/libvalidations.sh
+. /opt/pacloud/scripts/libpostgresql.sh
 
 # Load PostgreSQL environment variables
-. /opt/bitnami/scripts/postgresql-env.sh
+. /opt/pacloud/scripts/postgresql-env.sh
 
 # Ensure PostgreSQL environment variables settings are valid
 postgresql_validate

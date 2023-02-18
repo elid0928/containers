@@ -5,9 +5,9 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /opt/bitnami/scripts/liblog.sh
-. /opt/bitnami/scripts/libfs.sh
-. /opt/bitnami/scripts/libvalidations.sh
+. /opt/pacloud/scripts/liblog.sh
+. /opt/pacloud/scripts/libfs.sh
+. /opt/pacloud/scripts/libvalidations.sh
 
 # Functions
 
@@ -335,14 +335,14 @@ convert_to_mb() {
 #########################
 # Redirects output to /dev/null if debug mode is disabled
 # Globals:
-#   BITNAMI_DEBUG
+#   PACLOUD_DEBUG
 # Arguments:
 #   $@ - Command to execute
 # Returns:
 #   None
 #########################
 debug_execute() {
-    if is_boolean_yes "${BITNAMI_DEBUG:-false}"; then
+    if is_boolean_yes "${PACLOUD_DEBUG:-false}"; then
         "$@"
     else
         "$@" >/dev/null 2>&1

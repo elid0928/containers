@@ -4,17 +4,17 @@ components:
     - gosu
     - render-template
   files:
-    - /opt/bitnami/apache/conf/modsecurity.conf
-    - /opt/bitnami/apache/conf/unicode.mapping
+    - /opt/pacloud/apache/conf/modsecurity.conf
+    - /opt/pacloud/apache/conf/unicode.mapping
 filesystem:
   - mode: "0775"
     directories:
-      - /opt/bitnami/apache/var/run
-      - /opt/bitnami/apache/conf
-      - /opt/bitnami/apache/logs
-      - /opt/bitnami/apache/conf/vhosts
-      - /opt/bitnami/apache/conf/vhosts/htaccess
-      - /opt/bitnami/apache/htdocs
+      - /opt/pacloud/apache/var/run
+      - /opt/pacloud/apache/conf
+      - /opt/pacloud/apache/logs
+      - /opt/pacloud/apache/conf/vhosts
+      - /opt/pacloud/apache/conf/vhosts/htaccess
+      - /opt/pacloud/apache/htdocs
 modules:
   loaded:
     # Explicitly enabled in postunpack
@@ -43,7 +43,7 @@ modules:
     - ldap
     - authnz_ldap
     - security3
-root_dir: /opt/bitnami
+root_dir: /opt/pacloud
 version:
   bin_name: apachectl
   flag: -v

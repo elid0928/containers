@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Bitnami PostgreSQL setup
+# Pacloud PostgreSQL setup
 
 # shellcheck disable=SC1091
 
@@ -10,11 +10,11 @@ set -o pipefail
 #set -o xtrace
 
 # Load Libraries
-. /opt/bitnami/scripts/libpostgresql.sh
-. /opt/bitnami/scripts/librepmgr.sh
+. /opt/pacloud/scripts/libpostgresql.sh
+. /opt/pacloud/scripts/librepmgr.sh
 
 # Load PostgreSQL & repmgr environment variables
-. /opt/bitnami/scripts/postgresql-env.sh
+. /opt/pacloud/scripts/postgresql-env.sh
 
 # Ensure PostgreSQL & repmgr environment variables settings are valid
 repmgr_validate

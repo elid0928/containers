@@ -1,4 +1,4 @@
-# Bitnami package for Redis&reg; Sentinel
+# Pacloud package for Redis&reg; Sentinel
 
 ## What is Redis&reg; Sentinel?
 
@@ -6,64 +6,64 @@
 
 [Overview of Redis&reg; Sentinel](http://redis.io/)
 
-Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by Bitnami is for referential purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Ltd.
+Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by Pacloud is for referential purposes only and does not indicate any sponsorship, endorsement, or affiliation between Redis Ltd.
 
 ## TL;DR
 
 ```console
-$ docker run --name redis-sentinel -e REDIS_MASTER_HOST=redis bitnami/redis-sentinel:latest
+$ docker run --name redis-sentinel -e REDIS_MASTER_HOST=redis pacloud/redis-sentinel:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/redis-sentinel/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/pacloud/containers/main/pacloud/redis-sentinel/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
 **Warning**: This quick setup is only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Environment Variables](#environment-variables) section for a more secure deployment.
 
-## Why use Bitnami Images?
+## Why use Pacloud Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+* Pacloud closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Pacloud images the latest bug fixes and features are available as soon as possible.
+* Pacloud containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* All our images are based on [minideb](https://github.com/pacloud/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Pacloud images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* Pacloud container images are released on a regular basis with the latest distribution packages available.
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.pacloud.com/tutorials/work-with-non-root-containers/).
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
+Learn more about the Pacloud tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.pacloud.com/tutorials/understand-rolling-tags-containers/).
 
-You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `pacloud/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
-Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
+Subscribe to project updates by watching the [pacloud/containers GitHub repo](https://github.com/pacloud/containers).
 
 ## Get this image
 
-The recommended way to get the Bitnami Redis(R) Sentinel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/redis-sentinel).
+The recommended way to get the Pacloud Redis(R) Sentinel Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/pacloud/redis-sentinel).
 
 ```console
-$ docker pull bitnami/redis-sentinel:latest
+$ docker pull pacloud/redis-sentinel:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/redis-sentinel/tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/pacloud/redis-sentinel/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/redis-sentinel:[TAG]
+$ docker pull pacloud/redis-sentinel:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+$ git clone https://github.com/pacloud/containers.git
+$ cd pacloud/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t pacloud/APP:latest .
 ```
 
 ## Connecting to other containers
@@ -90,7 +90,7 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 $ docker run -d --name redis-server \
     -e ALLOW_EMPTY_PASSWORD=yes \
     --network app-tier \
-    bitnami/redis:latest
+    pacloud/redis:latest
 ```
 
 #### Step 3: Launch your Redis(R) Sentinel instance
@@ -101,7 +101,7 @@ Finally we create a new container instance to launch the Redis(R) client and con
 $ docker run -it --rm \
     -e REDIS_MASTER_HOST=redis-server \
     --network app-tier \
-    bitnami/redis-sentinel:latest
+    pacloud/redis-sentinel:latest
 ```
 
 ### Using Docker Compose
@@ -117,13 +117,13 @@ networks:
 
 services:
   redis:
-    image: 'bitnami/redis:latest'
+    image: 'pacloud/redis:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
       - app-tier
   redis-sentinel:
-    image: 'bitnami/redis-sentinel:latest'
+    image: 'pacloud/redis-sentinel:latest'
     environment:
       - REDIS_MASTER_HOST=redis
     ports:
@@ -140,7 +140,7 @@ $ docker-compose up -d
 
 #### Using Master-Slave setups
 
-When using Sentinel in Master-Slave setup, if you want to set the passwords for Master and Slave nodes, consider having the **same** `REDIS_PASSWORD` and `REDIS_MASTER_PASSWORD` for them ([#23](https://github.com/bitnami/bitnami-docker-redis-sentinel/issues/23)).
+When using Sentinel in Master-Slave setup, if you want to set the passwords for Master and Slave nodes, consider having the **same** `REDIS_PASSWORD` and `REDIS_MASTER_PASSWORD` for them ([#23](https://github.com/pacloud/pacloud-docker-redis-sentinel/issues/23)).
 
 ```yaml
 version: '2'
@@ -151,7 +151,7 @@ networks:
 
 services:
   redis:
-    image: 'bitnami/redis:latest'
+    image: 'pacloud/redis:latest'
     environment:
       - REDIS_REPLICATION_MODE=master
       - REDIS_PASSWORD=str0ng_passw0rd
@@ -160,7 +160,7 @@ services:
     ports:
       - '6379'
   redis-slave:
-    image: 'bitnami/redis:latest'
+    image: 'pacloud/redis:latest'
     environment:
       - REDIS_REPLICATION_MODE=slave
       - REDIS_MASTER_HOST=redis
@@ -173,7 +173,7 @@ services:
     networks:
       - app-tier
   redis-sentinel:
-    image: 'bitnami/redis-sentinel:latest'
+    image: 'pacloud/redis-sentinel:latest'
     environment:
       - REDIS_MASTER_PASSWORD=str0ng_passw0rd
     depends_on:
@@ -228,15 +228,15 @@ When enabling TLS, conventional standard traffic is disabled by default. However
 
     ```console
     $ docker run --name redis-sentinel \
-        -v /path/to/certs:/opt/bitnami/redis/certs \
-        -v /path/to/redis-sentinel/persistence:/bitnami \
+        -v /path/to/certs:/opt/pacloud/redis/certs \
+        -v /path/to/redis-sentinel/persistence:/pacloud \
         -e REDIS_MASTER_HOST=redis \
         -e REDIS_SENTINEL_TLS_ENABLED=yes \
-        -e REDIS_SENTINEL_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt \
-        -e REDIS_SENTINEL_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key \
-        -e REDIS_SENTINEL_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt \
-        bitnami/redis-cluster:latest
-        bitnami/redis-sentinel:latest
+        -e REDIS_SENTINEL_TLS_CERT_FILE=/opt/pacloud/redis/certs/redis.crt \
+        -e REDIS_SENTINEL_TLS_KEY_FILE=/opt/pacloud/redis/certs/redis.key \
+        -e REDIS_SENTINEL_TLS_CA_FILE=/opt/pacloud/redis/certs/redisCA.crt \
+        pacloud/redis-cluster:latest
+        pacloud/redis-sentinel:latest
     ```
 
 2. Modifying the `docker-compose.yml` file present in this repository:
@@ -247,20 +247,20 @@ When enabling TLS, conventional standard traffic is disabled by default. However
         environment:
           ...
           - REDIS_SENTINEL_TLS_ENABLED=yes
-          - REDIS_SENTINEL_TLS_CERT_FILE=/opt/bitnami/redis/certs/redis.crt
-          - REDIS_SENTINEL_TLS_KEY_FILE=/opt/bitnami/redis/certs/redis.key
-          - REDIS_SENTINEL_TLS_CA_FILE=/opt/bitnami/redis/certs/redisCA.crt
+          - REDIS_SENTINEL_TLS_CERT_FILE=/opt/pacloud/redis/certs/redis.crt
+          - REDIS_SENTINEL_TLS_KEY_FILE=/opt/pacloud/redis/certs/redis.key
+          - REDIS_SENTINEL_TLS_CA_FILE=/opt/pacloud/redis/certs/redisCA.crt
         ...
         volumes:
-          - /path/to/certs:/opt/bitnami/redis/certs
+          - /path/to/certs:/opt/pacloud/redis/certs
         ...
       ...
     ```
-Alternatively, you may also provide with this configuration in your [custom](https://github.com/bitnami/containers/blob/main/bitnami/redis-sentinel#configuration-file) configuration file.
+Alternatively, you may also provide with this configuration in your [custom](https://github.com/pacloud/containers/blob/main/pacloud/redis-sentinel#configuration-file) configuration file.
 
 ### Configuration file
 
-The image looks for configurations in `/bitnami/redis-sentinel/conf/`. You can mount a volume at `/bitnami` and copy/edit the configurations in the `/path/to/redis-persistence/redis-sentinel/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
+The image looks for configurations in `/pacloud/redis-sentinel/conf/`. You can mount a volume at `/pacloud` and copy/edit the configurations in the `/path/to/redis-persistence/redis-sentinel/conf/`. The default configurations will be populated to the `conf/` directory if it's empty.
 
 #### Step 1: Run the Redis(R) Sentinel image
 
@@ -269,18 +269,18 @@ Run the Redis(R) Sentinel image, mounting a directory from your host.
 ```console
 $ docker run --name redis-sentinel \
     -e REDIS_MASTER_HOST=redis \
-    -v /path/to/redis-sentinel/persistence:/bitnami \
-    bitnami/redis-sentinel:latest
+    -v /path/to/redis-sentinel/persistence:/pacloud \
+    pacloud/redis-sentinel:latest
 ```
 
-You can also modify the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/redis-sentinel/docker-compose.yml) file present in this repository:
+You can also modify the [`docker-compose.yml`](https://github.com/pacloud/containers/blob/main/pacloud/redis-sentinel/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
   redis-sentinel:
   ...
     volumes:
-      - /path/to/redis-persistence:/bitnami
+      - /path/to/redis-persistence:/pacloud
   ...
 ```
 
@@ -310,7 +310,7 @@ Refer to the [Redis(R) configuration](http://redis.io/topics/config) manual for 
 
 ## Logging
 
-The Bitnami Redis(R) Sentinel Docker Image sends the container logs to the `stdout`. To view the logs:
+The Pacloud Redis(R) Sentinel Docker Image sends the container logs to the `stdout`. To view the logs:
 
 ```console
 $ docker logs redis
@@ -328,16 +328,16 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of Redis(R) Sentinel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Pacloud provides up-to-date versions of Redis(R) Sentinel, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/redis-sentinel:latest
+$ docker pull pacloud/redis-sentinel:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/redis-sentinel:latest`.
+`pacloud/redis-sentinel:latest`.
 
 #### Step 2: Stop and backup the currently running container
 
@@ -376,7 +376,7 @@ $ docker-compose rm -v redis
 Re-create your container from the new image.
 
 ```console
-$ docker run --name redis bitnami/redis-sentinel:latest
+$ docker run --name redis pacloud/redis-sentinel:latest
 ```
 
 or using Docker Compose:
@@ -397,14 +397,14 @@ $ docker-compose up redis
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/pacloud/containers/issues) or submitting a [pull request](https://github.com/pacloud/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
+If you encountered a problem running this container, you can file an [issue](https://github.com/pacloud/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 Pacloud
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -37,7 +37,7 @@ jobs:
         uses: peter-evans/create-or-update-project-card@v2
         with:
           project-name: Support
-          # If the author comes from Bitnami, send it to Bitnami. Otherwise, all to Triage
-          column-name: ${{ (contains(fromJson(env.BITNAMI_TEAM), steps.get-issue.outputs.author)) && 'From Bitnami' || 'Triage' }}
-          token: "${{ secrets.BITNAMI_BOT_TOKEN }}"
+          # If the author comes from Pacloud, send it to Pacloud. Otherwise, all to Triage
+          column-name: ${{ (contains(fromJson(env.PACLOUD_TEAM), steps.get-issue.outputs.author)) && 'From Pacloud' || 'Triage' }}
+          token: "${{ secrets.PACLOUD_BOT_TOKEN }}"
           issue-number: ${{ steps.get-issue.outputs.number }}

@@ -5,7 +5,7 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /opt/bitnami/scripts/libos.sh
+. /opt/pacloud/scripts/libos.sh
 
 # Functions
 

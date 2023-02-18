@@ -6,7 +6,7 @@ on: # rebuild any PRs and main branch changes
       - labeled
     branches:
       - main
-      - bitnami:main
+      - pacloud:main
 permissions:
   issues: write
   pull-requests: write
@@ -40,8 +40,8 @@ jobs:
           files_changed_data=$(curl -s --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' -X GET -G "$URL")
           files_changed="$(echo $files_changed_data | jq -r '.[] | .filename')"
           # Adding || true to avoid "Process exited with code 1" errors
-          flavors=($(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
-          assets=($(echo "$files_changed" | xargs dirname | sed -nr "s|bitnami/([^/]*)/.*|\1|p" | sort | uniq || true))
+          flavors=($(echo "$files_changed" | xargs dirname | grep -o "^pacloud/[^/]*/[^/]*/[^/]*" | sort | uniq || true))
+          assets=($(echo "$files_changed" | xargs dirname | sed -nr "s|pacloud/([^/]*)/.*|\1|p" | sort | uniq || true))
           non_readme_files=$(echo "$files_changed" | grep -vc "\.md" || true)
 
           if [[ "$non_readme_files" -le "0" ]]; then
@@ -81,7 +81,7 @@ jobs:
           if [[ -d "${{ matrix.container }}" ]]; then
             name="$(echo "${{ matrix.container }}" | awk -F '/' '{print $2}')"
             tag=""
-            if [[ "${{ github.event.pull_request.user.login }}" == "bitnami-bot" ]]; then
+            if [[ "${{ github.event.pull_request.user.login }}" == "pacloud-bot" ]]; then
               tag="$(grep -oE "org.opencontainers.image.ref.name=\".+\"" ${{ matrix.container }}/Dockerfile | sed -nr "s|org.opencontainers.image.ref.name=\"(.+)\"|\1|p")"
             else
               # Build a tag based on current RUN number
@@ -128,9 +128,9 @@ jobs:
           result-encoding: string
           script: |
             state = 'success'
-            description = 'Well done! Everything looks good. Please wait for the Bitnami Team review.'
+            description = 'Well done! Everything looks good. Please wait for the Pacloud Team review.'
             if ("${{ needs.get-containers.result }}" != "success" ) {
-              description = "If you've just created this PR, don't worry about this message. The Bitnami Team has to review it and make the verification possible."
+              description = "If you've just created this PR, don't worry about this message. The Pacloud Team has to review it and make the verification possible."
               core.warning(description)
               state = 'pending'
             } else if ("${{ needs.get-containers.outputs.result }}" == "skip" ) {
@@ -162,11 +162,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Reviewal for automated PRs
     needs: verification-summary
-    # This job will be executed when the PR was created by bitnami-bot and it has the 'auto-merge' label
+    # This job will be executed when the PR was created by pacloud-bot and it has the 'auto-merge' label
     if: |
       always() &&
       contains(github.event.pull_request.labels.*.name, 'auto-merge') &&
-      github.event.pull_request.user.login == 'bitnami-bot'
+      github.event.pull_request.user.login == 'pacloud-bot'
     steps:
       # Approve the CI's PR if the 'VIB Verify' job succeeded
       # Approved by the 'github-actions' user; a PR can't be approved by its author
@@ -183,7 +183,7 @@ jobs:
           result-encoding: string
           retries: 3
           # Necessary to trigger CD workflows
-          github-token: ${{ secrets.BITNAMI_BOT_TOKEN }}
+          github-token: ${{ secrets.PACLOUD_BOT_TOKEN }}
           script: |
             github.rest.pulls.merge({
               pull_number: context.issue.number,
@@ -199,7 +199,7 @@ jobs:
         with:
           issue-number: ${{ github.event.number }}
           # Necessary to trigger support workflows
-          token: ${{ secrets.BITNAMI_BOT_TOKEN }}
+          token: ${{ secrets.PACLOUD_BOT_TOKEN }}
           body: |
             There has been an error during the automated release process. Manual revision is now required.
             Please check the related [action_run#${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for more information.

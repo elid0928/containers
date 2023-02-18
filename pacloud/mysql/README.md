@@ -1,4 +1,4 @@
-# MySQL packaged by Bitnami
+# MySQL packaged by Pacloud
 
 ## What is MySQL?
 
@@ -6,95 +6,95 @@
 
 [Overview of MySQL](http://www.mysql.com)
 
-Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+Trademarks: This software listing is packaged by Pacloud. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
 ```console
-$ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
+$ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes pacloud/mysql:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/mysql/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/pacloud/containers/main/pacloud/mysql/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
 **Warning**: These quick setups are only intended for development environments. You are encouraged to change the insecure default credentials and check out the available configuration options in the [Configuration](#configuration) section for a more secure deployment.
 
-## Why use Bitnami Images?
+## Why use Pacloud Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+* Pacloud closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Pacloud images the latest bug fixes and features are available as soon as possible.
+* Pacloud containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* All our images are based on [minideb](https://github.com/pacloud/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Pacloud images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* Pacloud container images are released on a regular basis with the latest distribution packages available.
 
 ## How to deploy MySQL in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami MySQL Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/mysql).
+Deploying Pacloud applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Pacloud MySQL Chart GitHub repository](https://github.com/pacloud/charts/tree/master/pacloud/mysql).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
+Pacloud containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.pacloud.com/tutorials/work-with-non-root-containers/).
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
+Learn more about the Pacloud tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.pacloud.com/tutorials/understand-rolling-tags-containers/).
 
-You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `pacloud/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
-Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
+Subscribe to project updates by watching the [pacloud/containers GitHub repo](https://github.com/pacloud/containers).
 
 ## Get this image
 
-The recommended way to get the Bitnami MySQL Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/mysql).
+The recommended way to get the Pacloud MySQL Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/pacloud/mysql).
 
 ```console
-$ docker pull bitnami/mysql:latest
+$ docker pull pacloud/mysql:latest
 ```
 
 To use a specific version, you can pull a versioned tag. You can view the
-[list of available versions](https://hub.docker.com/r/bitnami/mysql/tags/)
+[list of available versions](https://hub.docker.com/r/pacloud/mysql/tags/)
 in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/mysql:[TAG]
+$ docker pull pacloud/mysql:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+$ git clone https://github.com/pacloud/containers.git
+$ cd pacloud/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t pacloud/APP:latest .
 ```
 
 ## Persisting your database
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/mysql/data` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/pacloud/mysql/data` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
 $ docker run \
     -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/mysql-persistence:/bitnami/mysql/data \
-    bitnami/mysql:latest
+    -v /path/to/mysql-persistence:/pacloud/mysql/data \
+    pacloud/mysql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mysql/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/pacloud/containers/blob/main/pacloud/mysql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
   mysql:
   ...
     volumes:
-      - /path/to/mysql-persistence:/bitnami/mysql/data
+      - /path/to/mysql-persistence:/pacloud/mysql/data
   ...
 ```
 
@@ -124,7 +124,7 @@ Use the `--network app-tier` argument to the `docker run` command to attach the 
 $ docker run -d --name mysql-server \
     -e ALLOW_EMPTY_PASSWORD=yes \
     --network app-tier \
-    bitnami/mysql:latest
+    pacloud/mysql:latest
 ```
 
 #### Step 3: Launch your MySQL client instance
@@ -134,7 +134,7 @@ Finally we create a new container instance to launch the MySQL client and connec
 ```console
 $ docker run -it --rm \
     --network app-tier \
-    bitnami/mysql:latest mysql -h mysql-server -u root
+    pacloud/mysql:latest mysql -h mysql-server -u root
 ```
 
 ### Using Docker Compose
@@ -150,7 +150,7 @@ networks:
 
 services:
   mysql:
-    image: 'bitnami/mysql:latest'
+    image: 'pacloud/mysql:latest'
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     networks:
@@ -189,7 +189,7 @@ Take into account those scripts are treated differently depending on the extensi
 
 ### Setting the root password on first run
 
-The root user and password can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
+The root user and password can easily be setup with the Pacloud MySQL Docker image using the following environment variables:
 
  - `MYSQL_ROOT_USER`: The database admin user. Defaults to `root`.
  - `MYSQL_ROOT_PASSWORD`: The database admin user password. No defaults.
@@ -197,10 +197,10 @@ The root user and password can easily be setup with the Bitnami MySQL Docker ima
 Passing the `MYSQL_ROOT_PASSWORD` environment variable when running the image for the first time will set the password of the `MYSQL_ROOT_USER` user to the value of `MYSQL_ROOT_PASSWORD`.
 
 ```console
-$ docker run --name mysql -e MYSQL_ROOT_PASSWORD=password123 bitnami/mysql:latest
+$ docker run --name mysql -e MYSQL_ROOT_PASSWORD=password123 pacloud/mysql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mysql/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/pacloud/containers/blob/main/pacloud/mysql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -218,10 +218,10 @@ services:
 By default the MySQL image expects all the available passwords to be set. In order to allow empty passwords, it is necessary to set the `ALLOW_EMPTY_PASSWORD=yes` env variable. This env variable is only recommended for testing or development purposes. We strongly recommend specifying the `MYSQL_ROOT_PASSWORD` for any other scenario.
 
 ```console
-$ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes bitnami/mysql:latest
+$ docker run --name mysql -e ALLOW_EMPTY_PASSWORD=yes pacloud/mysql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mysql/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/pacloud/containers/blob/main/pacloud/mysql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -247,10 +247,10 @@ By passing the `MYSQL_DATABASE` environment variable when running the image for 
 $ docker run --name mysql \
     -e ALLOW_EMPTY_PASSWORD=yes \
     -e MYSQL_DATABASE=my_database \
-    bitnami/mysql:latest
+    pacloud/mysql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mysql/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/pacloud/containers/blob/main/pacloud/mysql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -273,10 +273,10 @@ $ docker run --name mysql \
   -e MYSQL_PASSWORD=my_password \
   -e MYSQL_DATABASE=my_database \
   -e MYSQL_AUTHENTICATION_PLUGIN=mysql_native_password \
-  bitnami/mysql:latest
+  pacloud/mysql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mysql/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/pacloud/containers/blob/main/pacloud/mysql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
@@ -294,7 +294,7 @@ services:
 
 ### Setting up a replication cluster
 
-A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/refman/8.0/en/server-options.html) cluster can easily be setup with the Bitnami MySQL Docker image using the following environment variables:
+A **zero downtime** MySQL master-slave [replication](https://dev.mysql.com/doc/refman/8.0/en/server-options.html) cluster can easily be setup with the Pacloud MySQL Docker image using the following environment variables:
 
  - `MYSQL_REPLICATION_MODE`: The replication mode. Possible values `master`/`slave`. No defaults.
  - `MYSQL_REPLICATION_USER`: The replication user created on the master on first run. No defaults.
@@ -319,7 +319,7 @@ $ docker run --name mysql-master \
   -e MYSQL_USER=my_user \
   -e MYSQL_PASSWORD=my_password \
   -e MYSQL_DATABASE=my_database \
-  bitnami/mysql:latest
+  pacloud/mysql:latest
 ```
 
 In the above command the container is configured as the `master` using the `MYSQL_REPLICATION_MODE` parameter. A replication user is specified using the `MYSQL_REPLICATION_USER` and `MYSQL_REPLICATION_PASSWORD` parameters.
@@ -335,7 +335,7 @@ $ docker run --name mysql-slave --link mysql-master:master \
   -e MYSQL_REPLICATION_PASSWORD=my_repl_password \
   -e MYSQL_MASTER_HOST=mysql-master \
   -e MYSQL_MASTER_ROOT_PASSWORD=master_root_password \
-  bitnami/mysql:latest
+  pacloud/mysql:latest
 ```
 
 In the above command the container is configured as a `slave` using the `MYSQL_REPLICATION_MODE` parameter. The `MYSQL_MASTER_HOST`, `MYSQL_MASTER_ROOT_USER` and `MYSQL_MASTER_ROOT_PASSWORD` parameters are used by the slave to connect to the master. It also takes a dump of the existing data in the master server. The replication user credentials are specified using the `MYSQL_REPLICATION_USER` and `MYSQL_REPLICATION_PASSWORD` parameters and should be the same as the one specified on the master.
@@ -349,11 +349,11 @@ version: '2'
 
 services:
   mysql-master:
-    image: 'bitnami/mysql:latest'
+    image: 'pacloud/mysql:latest'
     ports:
       - '3306'
     volumes:
-      - /path/to/mysql-persistence:/bitnami/mysql/data
+      - /path/to/mysql-persistence:/pacloud/mysql/data
     environment:
       - MYSQL_REPLICATION_MODE=master
       - MYSQL_REPLICATION_USER=repl_user
@@ -363,7 +363,7 @@ services:
       - MYSQL_PASSWORD=my_password
       - MYSQL_DATABASE=my_database
   mysql-slave:
-    image: 'bitnami/mysql:latest'
+    image: 'pacloud/mysql:latest'
     ports:
       - '3306'
     depends_on:
@@ -389,7 +389,7 @@ The above command scales up the number of slaves to `3`. You can scale down in t
 
 ### Configuration file
 
-The image looks for user-defined configurations in `/opt/bitnami/mysql/conf/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/opt/bitnami/mysql/conf/my_custom.cnf`.
+The image looks for user-defined configurations in `/opt/pacloud/mysql/conf/my_custom.cnf`. Create a file named `my_custom.cnf` and mount it at `/opt/pacloud/mysql/conf/my_custom.cnf`.
 
 For example, in order to override the `max_allowed_packet` directive:
 
@@ -406,20 +406,20 @@ max_allowed_packet=32M
 $ docker run --name mysql \
     -p 3306:3306 \
     -e ALLOW_EMPTY_PASSWORD=yes \
-    -v /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro \
-    -v /path/to/mysql-persistence:/bitnami/mysql/data \
-    bitnami/mysql:latest
+    -v /path/to/my_custom.cnf:/opt/pacloud/mysql/conf/my_custom.cnf:ro \
+    -v /path/to/mysql-persistence:/pacloud/mysql/data \
+    pacloud/mysql:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/blob/main/bitnami/mysql/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/pacloud/containers/blob/main/pacloud/mysql/docker-compose.yml) file present in this repository:
 
 ```yaml
 services:
   mysql:
   ...
     volumes:
-      - /path/to/mysql-persistence:/bitnami/mysql/data
-      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
+      - /path/to/mysql-persistence:/pacloud/mysql/data
+      - /path/to/my_custom.cnf:/opt/pacloud/mysql/conf/my_custom.cnf:ro
   ...
 ```
 
@@ -432,12 +432,12 @@ Refer to the [MySQL server option and variable reference guide](https://dev.mysq
 It is also possible to use your custom `my.cnf` and overwrite the main configuration file.
 
 ```console
-$ docker run --name mysql -v /path/to/my.cnf:/opt/bitnami/mysql/conf/my.cnf:ro bitnami/mysql:latest
+$ docker run --name mysql -v /path/to/my.cnf:/opt/pacloud/mysql/conf/my.cnf:ro pacloud/mysql:latest
 ```
 
 ## Customize this image
 
-The Bitnami MySQL Docker image is designed to be extended so it can be used as the base image for your custom configuration.
+The Pacloud MySQL Docker image is designed to be extended so it can be used as the base image for your custom configuration.
 
 ### Extend this image
 
@@ -448,7 +448,7 @@ Before extending this image, please note there are certain configuration setting
 If your desired customizations cannot be covered using the methods mentioned above, extend the image. To do so, create your own image using a Dockerfile with the format below:
 
 ```Dockerfile
-FROM bitnami/mysql
+FROM pacloud/mysql
 ### Put your customizations below
 ...
 ```
@@ -461,7 +461,7 @@ Here is an example of extending the image with the following modifications:
 - Change the user that runs the container
 
 ```Dockerfile
-FROM bitnami/mysql
+FROM pacloud/mysql
 
 ### Change user to perform privileged actions
 USER 0
@@ -471,7 +471,7 @@ RUN install_packages vim
 USER 1001
 
 ### modify configuration file.
-RUN ini-file set --section "mysqld" --key "collation-server" --value "utf8_general_ci" "/opt/bitnami/mysql/conf/my.cnf"
+RUN ini-file set --section "mysqld" --key "collation-server" --value "utf8_general_ci" "/opt/pacloud/mysql/conf/my.cnf"
 
 ### Modify the ports used by MySQL by default
 ## It is also possible to change these environment variables at runtime
@@ -495,8 +495,8 @@ services:
     ports:
       - '3306:3307'
     volumes:
-      - /path/to/my_custom.cnf:/opt/bitnami/mysql/conf/my_custom.cnf:ro
-      - data:/bitnami/mysql/data
+      - /path/to/my_custom.cnf:/opt/pacloud/mysql/conf/my_custom.cnf:ro
+      - data:/pacloud/mysql/data
 volumes:
   data:
     driver: local
@@ -504,7 +504,7 @@ volumes:
 
 ## Logging
 
-The Bitnami MySQL Docker image sends the container logs to the `stdout`. To view the logs:
+The Pacloud MySQL Docker image sends the container logs to the `stdout`. To view the logs:
 
 ```console
 $ docker logs mysql
@@ -516,7 +516,7 @@ or using Docker Compose:
 $ docker-compose logs mysql
 ```
 
-To increase the verbosity on intialization or add extra debug information, you can assign the `BITNAMI_DEBUG` environment variable to `true`.
+To increase the verbosity on intialization or add extra debug information, you can assign the `PACLOUD_DEBUG` environment variable to `true`.
 
 You can configure the containers [logging driver](https://docs.docker.com/engine/admin/logging/overview/) using the `--log-driver` option if you wish to consume the container logs differently. In the default configuration docker uses the `json-file` driver.
 
@@ -535,16 +535,16 @@ In some platforms, the filesystem used for persistence could be slow. That could
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of MySQL, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Pacloud provides up-to-date versions of MySQL, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/mysql:latest
+$ docker pull pacloud/mysql:latest
 ```
 
 or if you're using Docker Compose, update the value of the image property to
-`bitnami/mysql:latest`.
+`pacloud/mysql:latest`.
 
 #### Step 2: Stop and backup the currently running container
 
@@ -583,7 +583,7 @@ $ docker-compose rm -v mysql
 Re-create your container from the new image.
 
 ```console
-$ docker run --name mysql bitnami/mysql:latest
+$ docker run --name mysql pacloud/mysql:latest
 ```
 
 or using Docker Compose:
@@ -605,16 +605,16 @@ $ docker-compose up mysql
 ### 5.7.23-r52 and 8.0.12-r34
 
 - Decrease the size of the container. It is not necessary Node.js anymore. MySQL configuration moved to bash scripts in the `rootfs/` folder.
-- The recommended mount point to persist data changes to `/bitnami/mysql/data`.
-- The MySQL configuration files are not persisted in a volume anymore. Now, they can be found at `/opt/bitnami/mysql/conf`.
+- The recommended mount point to persist data changes to `/pacloud/mysql/data`.
+- The MySQL configuration files are not persisted in a volume anymore. Now, they can be found at `/opt/pacloud/mysql/conf`.
 - Backwards compatibility is not guaranteed when data is persisted using docker-compose. You can use the workaround below to overcome it:
 
 ```console
 $ docker-compose down
 ## Change the mount point
-sed -i -e 's#mysql_data:/bitnami#mysql_data:/bitnami/mysql/data#g' docker-compose.yml
-## Pull the latest bitnami/mysql image
-$ docker pull bitnami/mysql:latest
+sed -i -e 's#mysql_data:/pacloud#mysql_data:/pacloud/mysql/data#g' docker-compose.yml
+## Pull the latest pacloud/mysql image
+$ docker pull pacloud/mysql:latest
 $ docker-compose up -d
 ```
 
@@ -624,7 +624,7 @@ $ docker-compose up -d
 
 ### 5.7.21-r6
 - The MySQL conf file is not in a persistent volume by default.
-- The user is able to specify a custom file in the default location '/opt/bitnami/mysql/conf/my.cnf'.
+- The user is able to specify a custom file in the default location '/opt/pacloud/mysql/conf/my.cnf'.
 
 ### 5.7.17-r4
 
@@ -636,15 +636,15 @@ $ docker-compose up -d
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/pacloud/containers/issues) or submitting a [pull request](https://github.com/pacloud/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
+If you encountered a problem running this container, you can file an [issue](https://github.com/pacloud/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 Pacloud
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

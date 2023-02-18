@@ -8,12 +8,12 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /opt/bitnami/scripts/libpostgresql.sh
-. /opt/bitnami/scripts/libautoctl.sh
-. /opt/bitnami/scripts/libos.sh
+. /opt/pacloud/scripts/libpostgresql.sh
+. /opt/pacloud/scripts/libautoctl.sh
+. /opt/pacloud/scripts/libos.sh
 
 # Load PostgreSQL environment variables
-. /opt/bitnami/scripts/postgresql-env.sh
+. /opt/pacloud/scripts/postgresql-env.sh
 
 export HOME="$POSTGRESQL_AUTOCTL_VOLUME_DIR"
 

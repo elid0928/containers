@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-# Bitnami web server handler library
+# Pacloud web server handler library
 
 # shellcheck disable=SC1090,SC1091
 
 # Load generic libraries
-. /opt/bitnami/scripts/liblog.sh
+. /opt/pacloud/scripts/liblog.sh
 
 ########################
 # Execute a command (or list of commands) with the web server environment and library loaded
@@ -21,8 +21,8 @@ web_server_execute() {
     shift
     # Run program in sub-shell to avoid web server environment getting loaded when not necessary
     (
-        . "/opt/bitnami/scripts/lib${web_server}.sh"
-        . "/opt/bitnami/scripts/${web_server}-env.sh"
+        . "/opt/pacloud/scripts/lib${web_server}.sh"
+        . "/opt/pacloud/scripts/${web_server}-env.sh"
         "$@"
     )
 }
@@ -40,7 +40,7 @@ web_server_list() {
     local -r -a supported_web_servers=(apache nginx)
     local -a existing_web_servers=()
     for web_server in "${supported_web_servers[@]}"; do
-        [[ -f "/opt/bitnami/scripts/${web_server}-env.sh" ]] && existing_web_servers+=("$web_server")
+        [[ -f "/opt/pacloud/scripts/${web_server}-env.sh" ]] && existing_web_servers+=("$web_server")
     done
     echo "${existing_web_servers[@]:-}"
 }
@@ -82,7 +82,7 @@ web_server_validate() {
     if [[ -z "$(web_server_type)" || ! " ${supported_web_servers[*]} " == *" $(web_server_type) "* ]]; then
         print_validation_error "Could not detect any supported web servers. It must be one of: ${supported_web_servers[*]}"
     elif ! web_server_execute "$(web_server_type)" type -t "is_$(web_server_type)_running" >/dev/null; then
-        print_validation_error "Could not load the $(web_server_type) web server library from /opt/bitnami/scripts. Check that it exists and is readable."
+        print_validation_error "Could not load the $(web_server_type) web server library from /opt/pacloud/scripts. Check that it exists and is readable."
     fi
 
     return "$error_code"
@@ -112,7 +112,7 @@ is_web_server_running() {
 #########################
 web_server_start() {
     info "Starting $(web_server_type) in background"
-    "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/start.sh"
+    "${PACLOUD_ROOT_DIR}/scripts/$(web_server_type)/start.sh"
 }
 
 ########################
@@ -126,7 +126,7 @@ web_server_start() {
 #########################
 web_server_stop() {
     info "Stopping $(web_server_type)"
-    "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/stop.sh"
+    "${PACLOUD_ROOT_DIR}/scripts/$(web_server_type)/stop.sh"
 }
 
 ########################
@@ -140,7 +140,7 @@ web_server_stop() {
 #########################
 web_server_restart() {
     info "Restarting $(web_server_type)"
-    "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/restart.sh"
+    "${PACLOUD_ROOT_DIR}/scripts/$(web_server_type)/restart.sh"
 }
 
 ########################
@@ -153,7 +153,7 @@ web_server_restart() {
 #   None
 #########################
 web_server_reload() {
-    "${BITNAMI_ROOT_DIR}/scripts/$(web_server_type)/reload.sh"
+    "${PACLOUD_ROOT_DIR}/scripts/$(web_server_type)/reload.sh"
 }
 
 ########################

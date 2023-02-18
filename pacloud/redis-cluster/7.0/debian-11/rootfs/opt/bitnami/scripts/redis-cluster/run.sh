@@ -12,11 +12,11 @@ set -o pipefail
 set -m
 
 # Load Redis environment variables
-. /opt/bitnami/scripts/redis-cluster-env.sh
+. /opt/pacloud/scripts/redis-cluster-env.sh
 
 # Load libraries
-. /opt/bitnami/scripts/libos.sh
-. /opt/bitnami/scripts/librediscluster.sh
+. /opt/pacloud/scripts/libos.sh
+. /opt/pacloud/scripts/librediscluster.sh
 
 read -ra nodes <<< "$(tr ',;' ' ' <<< "${REDIS_NODES}")"
 

@@ -2,16 +2,16 @@ version: '2'
 
 services:
   redis-sentinel:
-    image: docker.io/bitnami/redis-sentinel:7.0
+    image: docker.io/pacloud/redis-sentinel:7.0
     volumes:
-      - redis-sentinel_data:/bitnami
+      - redis-sentinel_data:/pacloud
   redis:
-    image: docker.io/bitnami/redis:7.0
+    image: docker.io/pacloud/redis:7.0
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - redis_data:/bitnami
+      - redis_data:/pacloud
 volumes:
   redis-sentinel_data:
     driver: local

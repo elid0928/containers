@@ -8,10 +8,10 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load libraries
-. /opt/bitnami/scripts/librepmgr.sh
-. /opt/bitnami/scripts/libpostgresql.sh
+. /opt/pacloud/scripts/librepmgr.sh
+. /opt/pacloud/scripts/libpostgresql.sh
 
-. /opt/bitnami/scripts/postgresql-env.sh
+. /opt/pacloud/scripts/postgresql-env.sh
 
 echo "[REPMGR EVENT] Node id: $1; Event type: $2; Success [1|0]: $3; Time: $4;  Details: $5"
 event_script="$REPMGR_EVENTS_DIR/execs/$2.sh"

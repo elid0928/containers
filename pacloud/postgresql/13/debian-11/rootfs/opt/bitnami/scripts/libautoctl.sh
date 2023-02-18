@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-# Bitnami pg_auto_failover library
+# Pacloud pg_auto_failover library
 
 # shellcheck disable=SC1090,SC1091
 
 # Load PostgreSQL library
-. /opt/bitnami/scripts/libpostgresql.sh
+. /opt/pacloud/scripts/libpostgresql.sh
 
 ########################
 # Change pg_hba.conf so it allows access from replication users

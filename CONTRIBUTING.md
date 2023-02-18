@@ -15,8 +15,8 @@ Any type of contribution is welcome: new features, bug fixes, documentation impr
 
 When submitting a PR make sure that:
 - It must pass CI jobs for linting and test the changes (if any).
-- It must follow [container best practices](https://engineering.bitnami.com/articles/best-practices-writing-a-dockerfile.html).
-- The title of the PR is clear enough and starts with "[bitnami/<container-name>]"
+- It must follow [container best practices](https://engineering.pacloud.com/articles/best-practices-writing-a-dockerfile.html).
+- The title of the PR is clear enough and starts with "[pacloud/<container-name>]"
 - If necessary, add information to the repository's `README.md`.
 
 #### Sign Your Work
@@ -46,8 +46,8 @@ Notice the `Author` and `Signed-off-by` lines match. If they don't your PR will 
 
 ### PR Approval and Release Process
 
-1. Changes are manually reviewed by Bitnami team members usually within a business day.
-2. Once the changes are accepted, the PR is tested (if needed) into the Bitnami CI pipeline, the container is deployed and tested (verification and functional tests) using docker-compose and Helm (if there is an associated Helm Chart).
+1. Changes are manually reviewed by Pacloud team members usually within a business day.
+2. Once the changes are accepted, the PR is tested (if needed) into the Pacloud CI pipeline, the container is deployed and tested (verification and functional tests) using docker-compose and Helm (if there is an associated Helm Chart).
 3. The PR is merged by the reviewer(s) in the GitHub `master` branch.
 4. Then our CI/CD system is going to push the container image to the different registries including the recently merged changes.
 

@@ -8,16 +8,16 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load Redis environment variables
-. /opt/bitnami/scripts/redis-env.sh
+. /opt/pacloud/scripts/redis-env.sh
 
 # Load libraries
-. /opt/bitnami/scripts/libredis.sh
-. /opt/bitnami/scripts/libfs.sh
+. /opt/pacloud/scripts/libredis.sh
+. /opt/pacloud/scripts/libfs.sh
 
 for dir in "$REDIS_VOLUME_DIR" "$REDIS_DATA_DIR" "$REDIS_BASE_DIR" "$REDIS_CONF_DIR"; do
     ensure_dir_exists "$dir"
 done
-chmod -R g+rwX /bitnami "$REDIS_VOLUME_DIR" "$REDIS_BASE_DIR"
+chmod -R g+rwX /pacloud "$REDIS_VOLUME_DIR" "$REDIS_BASE_DIR"
 
 cp "${REDIS_BASE_DIR}/etc/redis-default.conf" "$REDIS_CONF_FILE"
 chmod g+rw "$REDIS_CONF_FILE"

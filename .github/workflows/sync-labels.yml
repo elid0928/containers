@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: EndBug/label-sync@v2
         with:
-          source-repo: bitnami/vms
+          source-repo: pacloud/vms
           delete-other-labels: false
           token: ${{ secrets.GITHUB_TOKEN }}

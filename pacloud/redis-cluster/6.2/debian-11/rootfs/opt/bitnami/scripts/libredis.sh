@@ -1,16 +1,16 @@
 #!/bin/bash
 #
-# Bitnami Redis library
+# Pacloud Redis library
 
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /opt/bitnami/scripts/libfile.sh
-. /opt/bitnami/scripts/liblog.sh
-. /opt/bitnami/scripts/libnet.sh
-. /opt/bitnami/scripts/libos.sh
-. /opt/bitnami/scripts/libservice.sh
-. /opt/bitnami/scripts/libvalidations.sh
+. /opt/pacloud/scripts/libfile.sh
+. /opt/pacloud/scripts/liblog.sh
+. /opt/pacloud/scripts/libnet.sh
+. /opt/pacloud/scripts/libos.sh
+. /opt/pacloud/scripts/libservice.sh
+. /opt/pacloud/scripts/libvalidations.sh
 
 # Functions
 

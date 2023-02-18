@@ -5,8 +5,8 @@
 # shellcheck disable=SC1091
 
 # Load Generic Libraries
-. /opt/bitnami/scripts/libvalidations.sh
-. /opt/bitnami/scripts/liblog.sh
+. /opt/pacloud/scripts/libvalidations.sh
+. /opt/pacloud/scripts/liblog.sh
 
 # Functions
 
@@ -293,7 +293,7 @@ remove_logrotate_conf() {
 generate_systemd_conf() {
     local -r service_name="${1:?service name is missing}"
     local -r systemd_units_dir="/etc/systemd/system"
-    local -r service_file="${systemd_units_dir}/bitnami.${service_name}.service"
+    local -r service_file="${systemd_units_dir}/pacloud.${service_name}.service"
     # Default values
     local name="$service_name"
     local type="forking"
@@ -352,9 +352,9 @@ generate_systemd_conf() {
     # Generate the Systemd unit
     cat > "$service_file" <<EOF
 [Unit]
-Description=Bitnami service for ${name}
-# Starting/stopping the main bitnami service should cause the same effect for this service
-PartOf=bitnami.service
+Description=Pacloud service for ${name}
+# Starting/stopping the main pacloud service should cause the same effect for this service
+PartOf=pacloud.service
 
 [Service]
 Type=${type}
@@ -404,7 +404,7 @@ LimitNOFILE=infinity
 StandardOutput=journal+console
 
 [Install]
-# Enabling/disabling the main bitnami service should cause the same effect for this service
-WantedBy=bitnami.service
+# Enabling/disabling the main pacloud service should cause the same effect for this service
+WantedBy=pacloud.service
 EOF
 }

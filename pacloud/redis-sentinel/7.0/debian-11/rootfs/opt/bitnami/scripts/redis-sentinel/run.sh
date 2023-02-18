@@ -8,12 +8,12 @@ set -o pipefail
 # set -o xtrace # Uncomment this line for debugging purposes
 
 # Load Redis Sentinel environment variables
-. /opt/bitnami/scripts/redis-sentinel-env.sh
+. /opt/pacloud/scripts/redis-sentinel-env.sh
 
 # Load libraries
-. /opt/bitnami/scripts/libredissentinel.sh
-. /opt/bitnami/scripts/liblog.sh
-. /opt/bitnami/scripts/libos.sh
+. /opt/pacloud/scripts/libredissentinel.sh
+. /opt/pacloud/scripts/liblog.sh
+. /opt/pacloud/scripts/libos.sh
 
 args=("$REDIS_SENTINEL_CONF_FILE" "--daemonize" "no" "$@")
 

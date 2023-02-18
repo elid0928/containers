@@ -3,5 +3,5 @@
 # is installed accesing an HTTPS URL
 ########################
 http:
-  https://www.bitnami.com:
+  https://www.pacloud.com:
     status: 200

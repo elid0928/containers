@@ -11,7 +11,7 @@ on: # rebuild any PRs and main branch changes
     branches:
       - main
     paths:
-      - 'bitnami/**'
+      - 'pacloud/**'
 env:
   CSP_API_URL: https://console.cloud.vmware.com
   CSP_API_TOKEN: ${{ secrets.CSP_API_TOKEN }}
@@ -22,7 +22,7 @@ jobs:
     name: Retrieve metadata and auxiliary files
     if: |
       github.event_name == 'workflow_dispatch' ||
-      (github.event.head_commit.author.username == 'bitnami-bot' && github.event.forced == false)
+      (github.event.head_commit.author.username == 'pacloud-bot' && github.event.forced == false)
     outputs:
       result: ${{ steps.get-publish-metadata.outputs.result }}
       containers: ${{ steps.get-publish-metadata.outputs.containers }}
@@ -77,7 +77,7 @@ jobs:
                   fi
                 fi
               fi
-            done <<< "$(echo "$files_changed" | xargs dirname | grep -o "^bitnami/[^/]*/[^/]*/[^/]*" | sort | uniq || true)"
+            done <<< "$(echo "$files_changed" | xargs dirname | grep -o "^pacloud/[^/]*/[^/]*/[^/]*" | sort | uniq || true)"
           done <<< "$(echo "${GITHUB_COMMITS}" | jq -r '.[] | .id')"
 
           if [[ "${#containers[@]}" -le "0" ]]; then
@@ -106,7 +106,7 @@ jobs:
             os_flavour=$(echo "$container" | jq -cr '.os_flavour')
             revision=$(echo "$container" | jq -cr '.revision')
             containers_path=$(echo "$container" | jq -cr '.path')
-            components_json_file="${containers_path}/prebuildfs/opt/bitnami/.bitnami_components.json"
+            components_json_file="${containers_path}/prebuildfs/opt/pacloud/.pacloud_components.json"
 
             # If the components.json file, so it seems has external packages
             if [[ -f "$components_json_file" ]]; then

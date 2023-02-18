@@ -3,21 +3,21 @@
 # Environment configuration for mysql
 
 # The values for all environment variables will be set in the below order of precedence
-# 1. Custom environment variables defined below after Bitnami defaults
-# 2. Constants defined in this file (environment variables with no default), i.e. BITNAMI_ROOT_DIR
+# 1. Custom environment variables defined below after Pacloud defaults
+# 2. Constants defined in this file (environment variables with no default), i.e. PACLOUD_ROOT_DIR
 # 3. Environment variables overridden via external files using *_FILE variables (see below)
 # 4. Environment variables set externally (i.e. current Bash context/Dockerfile/userdata)
 
 # Load logging library
 # shellcheck disable=SC1090,SC1091
-. /opt/bitnami/scripts/liblog.sh
+. /opt/pacloud/scripts/liblog.sh
 
-export BITNAMI_ROOT_DIR="/opt/bitnami"
-export BITNAMI_VOLUME_DIR="/bitnami"
+export PACLOUD_ROOT_DIR="/opt/pacloud"
+export PACLOUD_VOLUME_DIR="/pacloud"
 
 # Logging configuration
 export MODULE="${MODULE:-mysql}"
-export BITNAMI_DEBUG="${BITNAMI_DEBUG:-false}"
+export PACLOUD_DEBUG="${PACLOUD_DEBUG:-false}"
 
 # By setting an environment variable matching *_FILE to a file path, the prefixed environment
 # variable will be overridden with the value specified in that file
@@ -71,8 +71,8 @@ unset mysql_env_vars
 export DB_FLAVOR="mysql"
 
 # Paths
-export DB_BASE_DIR="${BITNAMI_ROOT_DIR}/mysql"
-export DB_VOLUME_DIR="${BITNAMI_VOLUME_DIR}/mysql"
+export DB_BASE_DIR="${PACLOUD_ROOT_DIR}/mysql"
+export DB_VOLUME_DIR="${PACLOUD_VOLUME_DIR}/mysql"
 export DB_DATA_DIR="${DB_VOLUME_DIR}/data"
 export DB_BIN_DIR="${DB_BASE_DIR}/bin"
 export DB_SBIN_DIR="${DB_BASE_DIR}/bin"
@@ -82,7 +82,7 @@ export DB_TMP_DIR="${DB_BASE_DIR}/tmp"
 export DB_CONF_FILE="${DB_CONF_DIR}/my.cnf"
 export DB_PID_FILE="${DB_TMP_DIR}/mysqld.pid"
 export DB_SOCKET_FILE="${DB_TMP_DIR}/mysql.sock"
-export PATH="${DB_SBIN_DIR}:${DB_BIN_DIR}:/opt/bitnami/common/bin:${PATH}"
+export PATH="${DB_SBIN_DIR}:${DB_BIN_DIR}:/opt/pacloud/common/bin:${PATH}"
 
 # System users (when running with a privileged user)
 export DB_DAEMON_USER="mysql"

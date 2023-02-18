@@ -1,4 +1,4 @@
-# PostgreSQL HA packaged by Bitnami
+# PostgreSQL HA packaged by Pacloud
 
 ## What is PostgreSQL HA?
 
@@ -6,85 +6,85 @@
 
 [Overview of PostgreSQL HA](https://www.postgresql.org/)
 
-Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
+Trademarks: This software listing is packaged by Pacloud. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
 
 ## TL;DR
 
 ```console
-$ docker run --name postgresql-repmgr bitnami/postgresql-repmgr:latest
+$ docker run --name postgresql-repmgr pacloud/postgresql-repmgr:latest
 ```
 
 ### Docker Compose
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/postgresql-repmgr/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/pacloud/containers/main/pacloud/postgresql-repmgr/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
 You can find the default credentials and available configuration options in the [Environment Variables](#environment-variables) section.
 
-## Why use Bitnami Images?
+## Why use Pacloud Images?
 
-* Bitnami closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
-* With Bitnami images the latest bug fixes and features are available as soon as possible.
-* Bitnami containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
-* All our images are based on [minideb](https://github.com/bitnami/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
-* All Bitnami images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
-* Bitnami container images are released on a regular basis with the latest distribution packages available.
+* Pacloud closely tracks upstream source changes and promptly publishes new versions of this image using our automated systems.
+* With Pacloud images the latest bug fixes and features are available as soon as possible.
+* Pacloud containers, virtual machines and cloud images use the same components and configuration approach - making it easy to switch between formats based on your project needs.
+* All our images are based on [minideb](https://github.com/pacloud/minideb) a minimalist Debian based container image which gives you a small base container image and the familiarity of a leading Linux distribution.
+* All Pacloud images available in Docker Hub are signed with [Docker Content Trust (DCT)](https://docs.docker.com/engine/security/trust/content_trust/). You can use `DOCKER_CONTENT_TRUST=1` to verify the integrity of the images.
+* Pacloud container images are released on a regular basis with the latest distribution packages available.
 
 ## Why use a non-root container?
 
-Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.bitnami.com/tutorials/work-with-non-root-containers/).
+Non-root container images add an extra layer of security and are generally recommended for production environments. However, because they run as a non-root user, privileged tasks are typically off-limits. Learn more about non-root containers [in our docs](https://docs.pacloud.com/tutorials/work-with-non-root-containers/).
 
 ## How to deploy Postgresql-repmgr in Kubernetes?
 
-Deploying Bitnami applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Bitnami PostgreSQL HA Chart GitHub repository](https://github.com/bitnami/charts/tree/master/bitnami/postgresql-ha).
+Deploying Pacloud applications as Helm Charts is the easiest way to get started with our applications on Kubernetes. Read more about the installation in the [Pacloud PostgreSQL HA Chart GitHub repository](https://github.com/pacloud/charts/tree/master/pacloud/postgresql-ha).
 
-Bitnami containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
+Pacloud containers can be used with [Kubeapps](https://kubeapps.dev/) for deployment and management of Helm Charts in clusters.
 
 ## Supported tags and respective `Dockerfile` links
 
-Learn more about the Bitnami tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers/).
+Learn more about the Pacloud tagging policy and the difference between rolling tags and immutable tags [in our documentation page](https://docs.pacloud.com/tutorials/understand-rolling-tags-containers/).
 
-You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `bitnami/ASSET/BRANCH/DISTRO/tags-info.yaml`.
+You can see the equivalence between the different tags by taking a look at the `tags-info.yaml` file present in the branch folder, i.e `pacloud/ASSET/BRANCH/DISTRO/tags-info.yaml`.
 
-Subscribe to project updates by watching the [bitnami/containers GitHub repo](https://github.com/bitnami/containers).
+Subscribe to project updates by watching the [pacloud/containers GitHub repo](https://github.com/pacloud/containers).
 
 ## Get this image
 
-The recommended way to get the Bitnami PostgreSQL HA Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/bitnami/postgresql-repmgr).
+The recommended way to get the Pacloud PostgreSQL HA Docker Image is to pull the prebuilt image from the [Docker Hub Registry](https://hub.docker.com/r/pacloud/postgresql-repmgr).
 
 ```console
-$ docker pull bitnami/postgresql-repmgr:latest
+$ docker pull pacloud/postgresql-repmgr:latest
 ```
 
-To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/bitnami/postgresql-repmgr/tags/) in the Docker Hub Registry.
+To use a specific version, you can pull a versioned tag. You can view the [list of available versions](https://hub.docker.com/r/pacloud/postgresql-repmgr/tags/) in the Docker Hub Registry.
 
 ```console
-$ docker pull bitnami/postgresql-repmgr:[TAG]
+$ docker pull pacloud/postgresql-repmgr:[TAG]
 ```
 
 If you wish, you can also build the image yourself by cloning the repository, changing to the directory containing the Dockerfile and executing the `docker build` command. Remember to replace the `APP`, `VERSION` and `OPERATING-SYSTEM` path placeholders in the example command below with the correct values.
 
 ```console
-$ git clone https://github.com/bitnami/containers.git
-$ cd bitnami/APP/VERSION/OPERATING-SYSTEM
-$ docker build -t bitnami/APP:latest .
+$ git clone https://github.com/pacloud/containers.git
+$ cd pacloud/APP/VERSION/OPERATING-SYSTEM
+$ docker build -t pacloud/APP:latest .
 ```
 
 ## Persisting your application
 
 If you remove the container all your data will be lost, and the next time you run the image the database will be reinitialized. To avoid this loss of data, you should mount a volume that will persist even after the container is removed.
 
-For persistence you should mount a directory at the `/bitnami/postgresql` path. If the mounted directory is empty, it will be initialized on the first run.
+For persistence you should mount a directory at the `/pacloud/postgresql` path. If the mounted directory is empty, it will be initialized on the first run.
 
 ```console
 $ docker run \
-    -v /path/to/postgresql-repmgr-persistence:/bitnami/postgresql \
-    bitnami/postgresql-repmgr:latest
+    -v /path/to/postgresql-repmgr-persistence:/pacloud/postgresql \
+    pacloud/postgresql-repmgr:latest
 ```
 
-The [`docker-compose.yml`](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/docker-compose.yml) file present in this repository already configures persistence.
+The [`docker-compose.yml`](https://github.com/pacloud/containers/tree/main/pacloud/postgresql/docker-compose.yml) file present in this repository already configures persistence.
 
 > NOTE: As this is a non-root container, the mounted files and directories must have the proper permissions for the UID `1001`.
 
@@ -117,7 +117,7 @@ $ docker run --detach --rm --name pg-0 \
   --env REPMGR_PRIMARY_HOST=pg-0 \
   --env REPMGR_PASSWORD=repmgrpass \
   --env POSTGRESQL_PASSWORD=secretpass \
-  bitnami/postgresql-repmgr:latest
+  pacloud/postgresql-repmgr:latest
 ```
 
 #### Step 3: Launch your PostgreSQL client instance
@@ -127,7 +127,7 @@ Finally we create a new container instance to launch the PostgreSQL client and c
 ```console
 $ docker run -it --rm \
   --network my-network \
-  bitnami/postgresql:10 \
+  pacloud/postgresql:10 \
   psql -h pg-0 -U postgres
 ```
 
@@ -144,7 +144,7 @@ networks:
 
 services:
   pg-0:
-    image: 'bitnami/postgresql-repmgr:latest'
+    image: 'pacloud/postgresql-repmgr:latest'
     networks:
       - my-network
     environment:
@@ -184,10 +184,10 @@ In order to have your custom files inside the docker image you can mount them as
 In the above commands you may have noticed the use of the `POSTGRESQL_PASSWORD` and `REPMGR_PASSWORD` environment variables. Passing the `POSTGRESQL_PASSWORD` environment variable when running the image for the first time will set the password of the `postgres` user to the value of `POSTGRESQL_PASSWORD` (or the content of the file specified in `POSTGRESQL_PASSWORD_FILE`). In the same way, passing the `REPMGR_PASSWORD` environment variable sets the password of the `repmgr` user to the value of `REPMGR_PASSWORD` (or the content of the file specified in `REPMGR_PASSWORD_FILE`).
 
 ```console
-$ docker run --name pg-0 --env REPMGR_PASSWORD=repmgrpass --env POSTGRESQL_PASSWORD=secretpass bitnami/postgresql-repmgr:latest
+$ docker run --name pg-0 --env REPMGR_PASSWORD=repmgrpass --env POSTGRESQL_PASSWORD=secretpass pacloud/postgresql-repmgr:latest
 ```
 
-or by modifying the [`docker-compose.yml`](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/docker-compose.yml) file present in this repository:
+or by modifying the [`docker-compose.yml`](https://github.com/pacloud/containers/tree/main/pacloud/postgresql-repmgr/docker-compose.yml) file present in this repository:
 
 ```diff
 ...
@@ -220,7 +220,7 @@ Refer to [Creating a database user on first run](#creating-a-database-user-on-fi
 By passing the `POSTGRESQL_DATABASE` environment variable when running the image for the first time, a database will be created. This is useful if your application requires that a database already exists, saving you from having to manually create the database using the PostgreSQL client.
 
 ```console
-$ docker run --name pg-0 --env POSTGRESQL_DATABASE=my_database bitnami/postgresql-repmgr:latest
+$ docker run --name pg-0 --env POSTGRESQL_DATABASE=my_database pacloud/postgresql-repmgr:latest
 ```
 
 ### Creating a database user on first run
@@ -228,17 +228,17 @@ $ docker run --name pg-0 --env POSTGRESQL_DATABASE=my_database bitnami/postgresq
 You can also create a restricted database user that only has permissions for the database created with the [`POSTGRESQL_DATABASE`](#creating-a-database-on-first-run) environment variable. To do this, provide the `POSTGRESQL_USERNAME` environment variable.
 
 ```console
-$ docker run --name pg-0 --env POSTGRESQL_USERNAME=my_user --env POSTGRESQL_PASSWORD=password123 --env POSTGRESQL_DATABASE=my_database bitnami/postgresql-repmgr:latest
+$ docker run --name pg-0 --env POSTGRESQL_USERNAME=my_user --env POSTGRESQL_PASSWORD=password123 --env POSTGRESQL_DATABASE=my_database pacloud/postgresql-repmgr:latest
 ```
 
-The [`docker-compose.yml`](https://github.com/bitnami/containers/tree/main/bitnami/postgresql/docker-compose.yml) file present in this repository already configures this setup.
+The [`docker-compose.yml`](https://github.com/pacloud/containers/tree/main/pacloud/postgresql/docker-compose.yml) file present in this repository already configures this setup.
 
 **Note!**
 When `POSTGRESQL_USERNAME` is specified, the `postgres` user is not assigned a password and as a result you cannot login remotely to the PostgreSQL server as the `postgres` user. If you still want to have access with the user `postgres`, please set the `POSTGRESQL_POSTGRES_PASSWORD` environment variable (or the content of the file specified in `POSTGRESQL_POSTGRES_PASSWORD_FILE`).
 
 ### Setting up a HA PostgreSQL cluster with streaming replication and repmgr
 
-A HA PostgreSQL cluster with [Streaming replication](https://www.postgresql.org/docs/10/warm-standby.html#STREAMING-REPLICATION) and [repmgr](https://repmgr.org) can easily be setup with the Bitnami PostgreSQL HA Docker Image using the following environment variables:
+A HA PostgreSQL cluster with [Streaming replication](https://www.postgresql.org/docs/10/warm-standby.html#STREAMING-REPLICATION) and [repmgr](https://repmgr.org) can easily be setup with the Pacloud PostgreSQL HA Docker Image using the following environment variables:
 
 - `POSTGRESQL_PASSWORD`: Password for `postgres` user. No defaults.
 - `POSTGRESQL_PASSWORD_FILE`: Path to a file that contains the `postgres` user password. This will override the value specified in `POSTGRESQL_PASSWORD`. No defaults.
@@ -279,7 +279,7 @@ $ docker run --detach --name pg-0 \
   --env REPMGR_PRIMARY_HOST=pg-0 \
   --env REPMGR_PASSWORD=repmgrpass \
   --env POSTGRESQL_PASSWORD=secretpass \
-  bitnami/postgresql-repmgr:latest
+  pacloud/postgresql-repmgr:latest
 ```
 
 #### Step 3: Create a standby node
@@ -295,7 +295,7 @@ $ docker run --detach --name pg-1 \
   --env REPMGR_PRIMARY_HOST=pg-0 \
   --env REPMGR_PASSWORD=repmgrpass \
   --env POSTGRESQL_PASSWORD=secretpass \
-  bitnami/postgresql-repmgr:latest
+  pacloud/postgresql-repmgr:latest
 ```
 
 With these three commands you now have a two node PostgreSQL primary-standby streaming replication cluster up and running. You can scale the cluster by adding/removing standby nodes without incurring any downtime.
@@ -306,10 +306,10 @@ If the master goes down, **repmgr** will ensure any of the standby nodes takes t
 
 > **Note**: The configuration of the other nodes in the cluster needs to be updated so that they are aware of them. This would require you to restart the old nodes adapting the `REPMGR_PARTNER_NODES` environment variable.
 
-With Docker Compose the HA PostgreSQL cluster can be setup using the [`docker-compose.yml`](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr/docker-compose.yml) file present in this repository:
+With Docker Compose the HA PostgreSQL cluster can be setup using the [`docker-compose.yml`](https://github.com/pacloud/containers/tree/main/pacloud/postgresql-repmgr/docker-compose.yml) file present in this repository:
 
 ```console
-$ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/postgresql-repmgr/docker-compose.yml > docker-compose.yml
+$ curl -sSL https://raw.githubusercontent.com/pacloud/containers/main/pacloud/postgresql-repmgr/docker-compose.yml > docker-compose.yml
 $ docker-compose up -d
 ```
 
@@ -330,11 +330,11 @@ When enabling TLS, PostgreSQL will support both standard and encrypted traffic b
 
     ```console
     $ docker run \
-        -v /path/to/certs:/opt/bitnami/postgresql/certs \
+        -v /path/to/certs:/opt/pacloud/postgresql/certs \
         -e POSTGRESQL_ENABLE_TLS=yes \
-        -e POSTGRESQL_TLS_CERT_FILE=/opt/bitnami/postgresql/certs/postgres.crt \
-        -e POSTGRESQL_TLS_KEY_FILE=/opt/bitnami/postgresql/certs/postgres.key \
-        bitnami/postgresql-repmgr:latest
+        -e POSTGRESQL_TLS_CERT_FILE=/opt/pacloud/postgresql/certs/postgres.crt \
+        -e POSTGRESQL_TLS_KEY_FILE=/opt/pacloud/postgresql/certs/postgres.key \
+        pacloud/postgresql-repmgr:latest
     ```
 
 2. Modifying the `docker-compose.yml` file present in this repository:
@@ -346,20 +346,20 @@ When enabling TLS, PostgreSQL will support both standard and encrypted traffic b
         environment:
           ...
           - POSTGRESQL_ENABLE_TLS=yes
-          - POSTGRESQL_TLS_CERT_FILE=/opt/bitnami/postgresql/certs/postgres.crt
-          - POSTGRESQL_TLS_KEY_FILE=/opt/bitnami/postgresql/certs/postgres.key
+          - POSTGRESQL_TLS_CERT_FILE=/opt/pacloud/postgresql/certs/postgres.crt
+          - POSTGRESQL_TLS_KEY_FILE=/opt/pacloud/postgresql/certs/postgres.key
         ...
         volumes:
           ...
-          - /path/to/certs:/opt/bitnami/postgresql/certs
+          - /path/to/certs:/opt/pacloud/postgresql/certs
       ...
     ```
 
-Alternatively, you may also provide this configuration in your [custom](https://github.com/bitnami/containers/tree/main/bitnami/postgresql-repmgr) configuration file.
+Alternatively, you may also provide this configuration in your [custom](https://github.com/pacloud/containers/tree/main/pacloud/postgresql-repmgr) configuration file.
 
 ### Configuration file
 
-The image looks for the `repmgr.conf`, `postgresql.conf` and `pg_hba.conf` files in `/opt/bitnami/repmgr/conf/` and `/opt/bitnami/postgresql/conf/`. You can mount a volume at `/bitnami/repmgr/conf/` and copy/edit the configuration files in the `/path/to/custom-conf/`. The default configurations will be populated to the `conf/` directories if `/bitnami/repmgr/conf/` is empty.
+The image looks for the `repmgr.conf`, `postgresql.conf` and `pg_hba.conf` files in `/opt/pacloud/repmgr/conf/` and `/opt/pacloud/postgresql/conf/`. You can mount a volume at `/pacloud/repmgr/conf/` and copy/edit the configuration files in the `/path/to/custom-conf/`. The default configurations will be populated to the `conf/` directories if `/pacloud/repmgr/conf/` is empty.
 
 ```console
 /path/to/custom-conf/
@@ -379,8 +379,8 @@ Run the PostgreSQL image, mounting a directory from your host.
 
 ```console
 $ docker run --name pg-0 \
-    -v /path/to/custom-conf/:/bitnami/repmgr/conf/ \
-    bitnami/postgresql-repmgr:latest
+    -v /path/to/custom-conf/:/pacloud/repmgr/conf/ \
+    pacloud/postgresql-repmgr:latest
 ```
 
 or using Docker Compose:
@@ -390,17 +390,17 @@ version: '2'
 
 services:
   pg-0:
-    image: bitnami/postgresql-repmgr:latest
+    image: pacloud/postgresql-repmgr:latest
     ports:
       - '5432:5432'
     volumes:
-      - /path/to/custom-conf/:/bitnami/repmgr/conf/
+      - /path/to/custom-conf/:/pacloud/repmgr/conf/
   pg-1:
-    image: bitnami/postgresql-repmgr:latest
+    image: pacloud/postgresql-repmgr:latest
     ports:
       - '5432:5432'
     volumes:
-      - /path/to/custom-conf/:/bitnami/repmgr/conf/
+      - /path/to/custom-conf/:/pacloud/repmgr/conf/
 ```
 
 #### Step 2: Edit the configuration
@@ -430,7 +430,7 @@ Refer to the [server configuration](http://www.postgresql.org/docs/10/static/run
 
 #### Allow settings to be loaded from files other than the default `postgresql.conf`
 
-Apart of using a custom `repmgr.conf`, `postgresql.conf` or `pg_hba.conf`, you can include files ending in `.conf` from the `conf.d` directory in the volume at `/bitnami/postgresql/conf/`.
+Apart of using a custom `repmgr.conf`, `postgresql.conf` or `pg_hba.conf`, you can include files ending in `.conf` from the `conf.d` directory in the volume at `/pacloud/postgresql/conf/`.
 For this purpose, the default `postgresql.conf` contains the following section:
 
 ```config
@@ -466,9 +466,9 @@ Run the PostgreSQL image, mounting a directory from your host.
 
 ```console
 $ docker run --name pg-0 \
-    -v /path/to/extra-custom-conf/:/bitnami/postgresql/conf/conf.d/ \
-    -v /path/to/custom-conf/:/bitnami/repmgr/conf/ \
-    bitnami/postgresql-repmgr:latest
+    -v /path/to/extra-custom-conf/:/pacloud/postgresql/conf/conf.d/ \
+    -v /path/to/custom-conf/:/pacloud/repmgr/conf/ \
+    pacloud/postgresql-repmgr:latest
 ```
 
 or using Docker Compose:
@@ -478,19 +478,19 @@ version: '2'
 
 services:
   pg-0:
-    image: bitnami/postgresql-repmgr:latest
+    image: pacloud/postgresql-repmgr:latest
     ports:
       - '5432:5432'
     volumes:
-      - /path/to/extra-custom-conf/:/bitnami/postgresql/conf/conf.d/
-      - /path/to/custom-conf/:/bitnami/repmgr/conf/
+      - /path/to/extra-custom-conf/:/pacloud/postgresql/conf/conf.d/
+      - /path/to/custom-conf/:/pacloud/repmgr/conf/
   pg-1:
-    image: bitnami/postgresql-repmgr:latest
+    image: pacloud/postgresql-repmgr:latest
     ports:
       - '5432:5432'
     volumes:
-      - /path/to/extra-custom-conf/:/bitnami/postgresql/conf/conf.d/
-      - /path/to/custom-conf/:/bitnami/repmgr/conf/
+      - /path/to/extra-custom-conf/:/pacloud/postgresql/conf/conf.d/
+      - /path/to/custom-conf/:/pacloud/repmgr/conf/
 ```
 
 #### Step 2: Edit the configuration
@@ -518,7 +518,7 @@ $ docker-compose restart pg-1
 
 ### Environment variables
 
-Please see the list of environment variables available in the Bitnami PostgreSQL HA container in the next table:
+Please see the list of environment variables available in the Pacloud PostgreSQL HA container in the next table:
 
 | Environment Variable                   | Default value |
 |:---------------------------------------|:--------------|
@@ -569,7 +569,7 @@ Please see the list of environment variables available in the Bitnami PostgreSQL
 
 ## Logging
 
-The Bitnami PostgreSQL HA Docker image sends the container logs to `stdout`. To view the logs:
+The Pacloud PostgreSQL HA Docker image sends the container logs to `stdout`. To view the logs:
 
 ```console
 $ docker logs pg-0
@@ -581,15 +581,15 @@ You can configure the containers [logging driver](https://docs.docker.com/engine
 
 ### Upgrade this image
 
-Bitnami provides up-to-date versions of PostgreSQL HA, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
+Pacloud provides up-to-date versions of PostgreSQL HA, including security patches, soon after they are made upstream. We recommend that you follow these steps to upgrade your container.
 
 #### Step 1: Get the updated image
 
 ```console
-$ docker pull bitnami/postgresql-repmgr:latest
+$ docker pull pacloud/postgresql-repmgr:latest
 ```
 
-or if you're using Docker Compose, update the value of the image property to `bitnami/postgresql-repmgr:latest`.
+or if you're using Docker Compose, update the value of the image property to `pacloud/postgresql-repmgr:latest`.
 
 #### Step 2: Stop the running container
 
@@ -630,7 +630,7 @@ $ docker-compose rm -v pg-1
 Re-create your container from the new image.
 
 ```console
-$ docker run --name pg-0 bitnami/postgresql-repmgr:latest
+$ docker run --name pg-0 pacloud/postgresql-repmgr:latest
 ```
 
 or using Docker Compose:
@@ -653,15 +653,15 @@ $ docker-compose up pg-1
 
 ## Contributing
 
-We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/bitnami/containers/issues) or submitting a [pull request](https://github.com/bitnami/containers/pulls) with your contribution.
+We'd love for you to contribute to this container. You can request new features by creating an [issue](https://github.com/pacloud/containers/issues) or submitting a [pull request](https://github.com/pacloud/containers/pulls) with your contribution.
 
 ## Issues
 
-If you encountered a problem running this container, you can file an [issue](https://github.com/bitnami/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
+If you encountered a problem running this container, you can file an [issue](https://github.com/pacloud/containers/issues/new/choose). For us to provide better support, be sure to fill the issue template.
 
 ## License
 
-Copyright &copy; 2023 Bitnami
+Copyright &copy; 2023 Pacloud
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
