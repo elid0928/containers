@@ -1,7 +1,7 @@
 version: '2'
 services:
   redis-node-0:
-    image: redis-cluster:origin
+    image: redis-cluster:5.0.14
     volumes:
       - redis-cluster_data-0:/pacloud/redis/data
     environment:
@@ -9,7 +9,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-1:
-    image: redis-cluster:origin
+    image: redis-cluster:5.0.14
     volumes:
       - redis-cluster_data-1:/pacloud/redis/data
     environment:
@@ -17,7 +17,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-2:
-    image: redis-cluster:origin
+    image: redis-cluster:5.0.14
     volumes:
       - redis-cluster_data-2:/pacloud/redis/data
     environment:
@@ -25,7 +25,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-3:
-    image: redis-cluster:origin
+    image: redis-cluster:5.0.14
     volumes:
       - redis-cluster_data-3:/pacloud/redis/data
     environment:
@@ -33,7 +33,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-4:
-    image: redis-cluster:origin
+    image: redis-cluster:5.0.14
     volumes:
       - redis-cluster_data-4:/pacloud/redis/data
     environment:
@@ -41,7 +41,7 @@ services:
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
 
   redis-node-5:
-    image: redis-cluster:origin
+    image: redis-cluster:5.0.14
     volumes:
       - redis-cluster_data-5:/pacloud/redis/data
     depends_on:
