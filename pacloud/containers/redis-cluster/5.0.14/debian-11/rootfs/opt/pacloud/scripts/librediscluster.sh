@@ -116,8 +116,11 @@ redis_cluster_override_conf() {
 #   None
 #########################
 redis_cluster_initialize() {
+    info "Initializing Redis cluster..."
     redis_configure_default
+    info "Redis default configuration loaded"
     redis_cluster_override_conf
+    info "Redis cluster initialized"
 }
 
 ########################
@@ -201,6 +204,7 @@ redis_cluster_update_ips() {
     if [[ ! -f "${REDIS_DATA_DIR}/nodes.sh" ]]; then
         # It is the first initialization so store the nodes
         for node in "${nodes[@]}"; do
+            info "Waiting for DNS lookup of ${node}..."
             read -r -a host_and_port <<< "$(to_host_and_port "$node")"
             ip=$(wait_for_dns_lookup "${host_and_port[0]}" "$REDIS_DNS_RETRIES" 5)
             host_2_ip_array["$node"]="$ip"
