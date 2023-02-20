@@ -23,7 +23,7 @@ Access the pod you want to debug by executing
 
 In order to replicate the container startup scripts execute this command:
 
-    /opt/bitnami/scripts/redis-cluster/entrypoint.sh /opt/bitnami/scripts/redis-cluster/run.sh
+    /opt/pacloud/scripts/redis-cluster/entrypoint.sh /opt/pacloud/scripts/redis-cluster/run.sh
 
 {{- else }}
 

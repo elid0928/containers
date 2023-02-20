@@ -84,11 +84,11 @@ spec:
           {{- else }}
           args:
             - |
-              . /opt/bitnami/scripts/libnet.sh
-              . /opt/bitnami/scripts/libos.sh
+              . /opt/pacloud/scripts/libnet.sh
+              . /opt/pacloud/scripts/libos.sh
               # Backwards compatibility change
-              if ! [[ -f /opt/bitnami/redis/etc/redis.conf ]]; then
-                  cp /opt/bitnami/redis/etc/redis-default.conf /opt/bitnami/redis/etc/redis.conf
+              if ! [[ -f /opt/pacloud/redis/etc/redis.conf ]]; then
+                  cp /opt/pacloud/redis/etc/redis-default.conf /opt/pacloud/redis/etc/redis.conf
               fi
               firstNodeIP=$(wait_for_dns_lookup {{ template "common.names.fullname" . }}-0.{{ template "common.names.fullname" . }}-headless 120 5)
               {{- if .Values.cluster.externalAccess.enabled }}
@@ -184,7 +184,7 @@ spec:
               {{- end }}
           {{- end }}
           env:
-            - name: BITNAMI_DEBUG
+            - name: PACLOUD_DEBUG
               value: {{ ternary "true" "false" (or .Values.image.debug .Values.diagnosticMode.enabled) | quote }}
             {{- if .Values.cluster.externalAccess.enabled }}
             {{- if .Values.tls.enabled }}
@@ -243,7 +243,7 @@ spec:
           volumeMounts:
             {{- if .Values.tls.enabled }}
             - name: redis-certificates
-              mountPath: /opt/bitnami/redis/certs
+              mountPath: /opt/pacloud/redis/certs
               readOnly: true
             {{- end }}
             {{- if .Values.updateJob.extraVolumeMounts }}

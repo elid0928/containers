@@ -102,8 +102,8 @@ spec:
           args:
             - |
               # Backwards compatibility change
-              if ! [[ -f /opt/bitnami/redis/etc/redis.conf ]]; then
-                  cp /opt/bitnami/redis/etc/redis-default.conf /opt/bitnami/redis/etc/redis.conf
+              if ! [[ -f /opt/pacloud/redis/etc/redis.conf ]]; then
+                  cp /opt/pacloud/redis/etc/redis-default.conf /opt/pacloud/redis/etc/redis.conf
               fi
               pod_index=($(echo "$POD_NAME" | tr "-" "\n"))
               pod_index="${pod_index[-1]}"
@@ -116,14 +116,14 @@ spec:
                 export REDIS_CLUSTER_REPLICAS="{{ .Values.cluster.replicas }}"
               fi
               {{- end }}
-              /opt/bitnami/scripts/redis-cluster/entrypoint.sh /opt/bitnami/scripts/redis-cluster/run.sh
+              /opt/pacloud/scripts/redis-cluster/entrypoint.sh /opt/pacloud/scripts/redis-cluster/run.sh
           {{- else }}
           args:
             - |
               # Backwards compatibility change
-              if ! [[ -f /opt/bitnami/redis/etc/redis.conf ]]; then
+              if ! [[ -f /opt/pacloud/redis/etc/redis.conf ]]; then
                   echo COPYING FILE
-                  cp  /opt/bitnami/redis/etc/redis-default.conf /opt/bitnami/redis/etc/redis.conf
+                  cp  /opt/pacloud/redis/etc/redis-default.conf /opt/pacloud/redis/etc/redis.conf
               fi
               {{- if .Values.cluster.init }}
               pod_index=($(echo "$POD_NAME" | tr "-" "\n"))
@@ -133,7 +133,7 @@ spec:
                 export REDIS_CLUSTER_REPLICAS="{{ .Values.cluster.replicas }}"
               fi
               {{- end }}
-              /opt/bitnami/scripts/redis-cluster/entrypoint.sh /opt/bitnami/scripts/redis-cluster/run.sh
+              /opt/pacloud/scripts/redis-cluster/entrypoint.sh /opt/pacloud/scripts/redis-cluster/run.sh
           {{- end }}
           env:
             - name: POD_NAME
@@ -155,7 +155,7 @@ spec:
                   key: {{ template "redis-cluster.secretPasswordKey" . }}
             {{- if .Values.usePasswordFile }}
             - name: REDIS_PASSWORD_FILE
-              value: "/opt/bitnami/redis/secrets/redis-password"
+              value: "/opt/pacloud/redis/secrets/redis-password"
             {{- else }}
             - name: REDIS_PASSWORD
               valueFrom:
@@ -267,19 +267,19 @@ spec:
               mountPath: /scripts
             {{- if .Values.usePasswordFile }}
             - name: redis-password
-              mountPath: /opt/bitnami/redis/secrets/
+              mountPath: /opt/pacloud/redis/secrets/
             {{- end }}
             - name: redis-data
               mountPath: {{ .Values.persistence.path }}
               subPath: {{ .Values.persistence.subPath }}
             - name: default-config
-              mountPath: /opt/bitnami/redis/etc/redis-default.conf
+              mountPath: /opt/pacloud/redis/etc/redis-default.conf
               subPath: redis-default.conf
             - name: redis-tmp-conf
-              mountPath: /opt/bitnami/redis/etc/
+              mountPath: /opt/pacloud/redis/etc/
             {{- if .Values.tls.enabled }}
             - name: redis-certificates
-              mountPath: /opt/bitnami/redis/certs
+              mountPath: /opt/pacloud/redis/certs
               readOnly: true
             {{- end }}
             {{- if .Values.redis.extraVolumeMounts }}
@@ -306,7 +306,7 @@ spec:
               redis_exporter{{- range $key, $value := .Values.metrics.extraArgs }} --{{ $key }}={{ $value }}{{- end }}
           {{- end }}
           env:
-            - name: BITNAMI_DEBUG
+            - name: PACLOUD_DEBUG
               value: {{ ternary "true" "false" (or .Values.image.debug .Values.diagnosticMode.enabled) | quote }}
             - name: REDIS_ALIAS
               value: {{ template "common.names.fullname" . }}
@@ -321,7 +321,7 @@ spec:
             {{- end }}
             {{- if .Values.usePasswordFile }}
             - name: REDIS_PASSWORD_FILE
-              value: "/opt/bitnami/redis/secrets/redis-password"
+              value: "/opt/pacloud/redis/secrets/redis-password"
             {{- end }}
             {{- if .Values.tls.enabled }}
             - name: REDIS_EXPORTER_TLS_CLIENT_KEY_FILE
@@ -335,11 +335,11 @@ spec:
           volumeMounts:
             {{- if .Values.usePasswordFile }}
             - name: redis-password
-              mountPath: /opt/bitnami/redis/secrets/
+              mountPath: /opt/pacloud/redis/secrets/
             {{- end }}
             {{- if .Values.tls.enabled }}
             - name: redis-certificates
-              mountPath: /opt/bitnami/redis/certs
+              mountPath: /opt/pacloud/redis/certs
               readOnly: true
             {{- end }}
           {{- end }}
