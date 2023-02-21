@@ -2,7 +2,6 @@ version: '2'
 services:
   redis-node-0:
     image: redis-cluster:test3
-    command: bash -c "sleep 1000000"
     volumes:
       - redis-cluster_data-0:/pacloud/redis/data
     environment:
@@ -11,7 +10,6 @@ services:
 
   redis-node-1:
     image: redis-cluster:test3
-    command: bash -c "sleep 1000000"
     volumes:
       - redis-cluster_data-1:/pacloud/redis/data
     environment:
@@ -20,7 +18,6 @@ services:
 
   redis-node-2:
     image: redis-cluster:test3
-    command: bash -c "sleep 1000000"
     volumes:
       - redis-cluster_data-2:/pacloud/redis/data
     environment:
@@ -29,7 +26,6 @@ services:
 
   redis-node-3:
     image: redis-cluster:test3
-    command: bash -c "sleep 1000000"
     volumes:
       - redis-cluster_data-3:/pacloud/redis/data
     environment:
@@ -38,7 +34,6 @@ services:
 
   redis-node-4:
     image: redis-cluster:test3
-    command: bash -c "sleep 1000000"
     volumes:
       - redis-cluster_data-4:/pacloud/redis/data
     environment:
@@ -47,7 +42,6 @@ services:
 
   redis-node-5:
     image: redis-cluster:test3
-    command: bash -c "sleep 1000000"
     volumes:
       - redis-cluster_data-5:/pacloud/redis/data
     depends_on:
