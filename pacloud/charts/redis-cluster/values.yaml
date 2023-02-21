@@ -73,7 +73,7 @@ image:
   ## Pacloud Redis&reg; image tag
   ## ref: https://github.com/pacloud/containers/tree/main/pacloud/redis#supported-tags-and-respective-dockerfile-links
   ##
-  tag: test3
+  tag: 5.0.14.2
   digest: ""
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'

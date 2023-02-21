@@ -16,6 +16,10 @@ ENV HOME="/" \
     OS_FLAVOUR="debian-11" \
     OS_NAME="linux"
 
+# 创建用户及用户组
+RUN groupadd -r -g 1001 redis && \
+    useradd -u 1001 -r -g redis -m -d /home/redis -s /sbin/nologin -c "pacloud user" redis && \
+    chmod 755 /home/redis
 COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
