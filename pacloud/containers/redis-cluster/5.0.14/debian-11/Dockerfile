@@ -63,6 +63,6 @@ ENV APP_VERSION="6.2.10" \
 
 EXPOSE 6379
 
-USER 1001
+# USER 1001
 ENTRYPOINT [ "/opt/pacloud/scripts/redis-cluster/entrypoint.sh" ]
 CMD [ "/opt/pacloud/scripts/redis-cluster/run.sh" ]
