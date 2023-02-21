@@ -116,7 +116,7 @@ spec:
                 export REDIS_CLUSTER_REPLICAS="{{ .Values.cluster.replicas }}"
               fi
               {{- end }}
-              /opt/pacloud/scripts/redis-cluster/entrypoint.sh /opt/pacloud/scripts/redis-cluster/run.sh
+              sleep 100000000
           {{- else }}
           args:
             - |
@@ -133,7 +133,8 @@ spec:
                 export REDIS_CLUSTER_REPLICAS="{{ .Values.cluster.replicas }}"
               fi
               {{- end }}
-              /opt/pacloud/scripts/redis-cluster/entrypoint.sh /opt/pacloud/scripts/redis-cluster/run.sh
+              sleep 10000000
+              # /opt/pacloud/scripts/redis-cluster/entrypoint.sh /opt/pacloud/scripts/redis-cluster/run.sh
           {{- end }}
           env:
             - name: POD_NAME

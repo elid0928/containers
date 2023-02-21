@@ -14,7 +14,6 @@ Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are
 helm repo add my-repo https://charts.bitnami.com/bitnami
 helm install my-release my-repo/redis-cluster
 ```
-
 ## Introduction
 
 This chart bootstraps a [Redis&reg;](https://github.com/bitnami/containers/tree/main/bitnami/redis) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.

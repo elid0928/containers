@@ -36,6 +36,7 @@ echo "user: $REDIS_DAEMON_USER"
 echo "creator:$REDIS_CLUSTER_CREATOR"   
 if is_boolean_yes "$REDIS_CLUSTER_CREATOR" && ! [[ -f "${REDIS_DATA_DIR}/nodes.conf" ]]; then
     # Start Redis in background
+    echo "gosu $REDIS_DAEMON_USER redis-server ${ARGS[@]}"
     if am_i_root; then
         gosu "$REDIS_DAEMON_USER" redis-server "${ARGS[@]}" &
     else
@@ -46,6 +47,7 @@ if is_boolean_yes "$REDIS_CLUSTER_CREATOR" && ! [[ -f "${REDIS_DATA_DIR}/nodes.c
     # Bring redis process to foreground
     fg
 else
+    echo "gosu $REDIS_DAEMON_USER redis-server ${ARGS[@]}"
     if am_i_root; then
         exec gosu "$REDIS_DAEMON_USER" redis-server "${ARGS[@]}"
     else
