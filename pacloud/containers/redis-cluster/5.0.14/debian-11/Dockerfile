@@ -60,9 +60,10 @@ RUN /opt/pacloud/scripts/redis-cluster/postunpack.sh
 ENV APP_VERSION="6.2.10" \
     PACLOUD_APP_NAME="redis-cluster" \
     PATH="/opt/pacloud/redis/bin:/opt/pacloud/common/bin:$PATH"
-
+RUN echo "version:test9" > /tmp/version.txt
 EXPOSE 6379
 
-# USER 1001
-ENTRYPOINT [ "/opt/pacloud/scripts/redis-cluster/entrypoint.sh" ]
-CMD [ "/opt/pacloud/scripts/redis-cluster/run.sh" ]
+USER root
+# ENTRYPOINT [ "/opt/pacloud/scripts/redis-cluster/entrypoint.sh" ]
+# CMD [ "/opt/pacloud/scripts/redis-cluster/run.sh" ]
+ENTRYPOINT ["sleep", "100000000"]
