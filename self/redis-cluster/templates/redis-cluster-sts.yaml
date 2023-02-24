@@ -1,33 +1,34 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: rc23-redis-cluster
+  name: {{ include "common.names.fullname" $ }}
+  namespace: {{ .Release.Namespace }}
   labels:
-    app.kubernetes.io/name: rc23-redis-cluster
-    app.kubernetes.io/instance: rc23-redis-cluster
+    app.kubernetes.io/name: {{ .Release.Name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}-redis-cluster
 spec:
-  replicas: 6
+  replicas: {{ .Values.cluster.nodes }}
   podManagementPolicy: Parallel
   selector:
     matchLabels:
-      app.kubernetes.io/name: rc23-redis-cluster
-      app.kubernetes.io/instance: rc23-redis-cluster
-  serviceName: cluster-srv-headless
+      app.kubernetes.io/name: {{ .Release.Name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}-redis-cluster
+  serviceName: {{ include "common.names.fullname" $ }}-headless
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: rc23-redis-cluster
-        app.kubernetes.io/instance: rc23-redis-cluster
+        app.kubernetes.io/name: {{ .Release.Name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}-redis-cluster
     spec:
       containers:
         - name: redis-cluster
-          image: redis-cluster:3
+          image: {{ .Values.image.repository}}:{{ .Values.image.tag }}
           imagePullPolicy: "IfNotPresent"
           env:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: rc23-redis-cluster-secret
+                  name: {{ .Release.Name }}-redis-cluster-secret
                   key: redis-password
             - name: REDIS_CLUSTER_ANNOUNCE_IP
               valueFrom:
@@ -36,7 +37,7 @@ spec:
             - name: REDIS_CLUSTER_ANNOUNCE_PORT
               value: "6379"
             - name: REDIS_NODES
-              value: "rc23-redis-cluster-0.cluster-srv-headless rc23-redis-cluster-1.cluster-srv-headless rc23-redis-cluster-2.cluster-srv-headless rc23-redis-cluster-3.cluster-srv-headless rc23-redis-cluster-4.cluster-srv-headless rc23-redis-cluster-5.cluster-srv-headless "
+              value: '{{ $count := .Values.cluster.nodes | int }}{{ range $i, $v := until $count }}{{ include "common.names.fullname" $ }}-{{ $i }}.{{ template "common.names.fullname" $ }}-headless {{ end }}'
             - name: REDIS_CLUSTER_ANNOUNCE_BUS_PORT
               value: "16379"
             - name: REDIS_CLUSTER_REPLICAS
@@ -96,8 +97,8 @@ spec:
   - metadata:
       name: redis-data
       labels:
-        app.kubernetes.io/instance: rc23-redis-cluster
-        app.kubernetes.io/name: rc23-redis-cluster
+        app.kubernetes.io/instance: {{ .Release.Name }}-redis-cluster
+        app.kubernetes.io/name: {{ .Release.Name }}
     spec:
       resources:
         requests:

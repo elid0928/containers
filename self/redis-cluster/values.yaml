@@ -1,0 +1,5 @@
+image:
+  repository: redis-cluster
+  tag: 3
+cluster:
+  nodes: 16
