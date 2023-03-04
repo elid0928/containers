@@ -1,5 +1,48 @@
 image:
-  repository: redis-cluster
-  tag: 3
+  #repository: redis-cluster
+  repository: dongdongqiang/redis-cluster
+  tag: 5.0.14
+  pullPolicy: IfNotPresent
+  imagePullSecrets: defaultdocker
+global:
+  imageRegistry: ""
+  ## E.g.
+  ## imagePullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  imagePullSecrets: []
+  storageClass: ""
+  redis:
+    password: ""
 cluster:
-  nodes: 16
+  nodes: 6
+  init: "true"
+  replicas: 1
+  update:
+    addNodes: "false"
+    currentNumberOfNodes: 16
+    currentNumberOfReplicas: 1
+  externalAccess:
+    enabled: false
+
+usePassword: true
+
+diagnosticMode:
+  enabled: false
+  command: "redis-cli --cluster check"
+  args: "global"
+tls:
+  enabled: false
+updateJob:
+  ## @param updateJob.activeDeadlineSeconds Number of seconds the Job to create the cluster will be waiting for the Nodes to be ready.
+  ##
+  activeDeadlineSeconds: 600
+podSecurityContext:
+  enabled: false
+
+containerSecurityContext: 
+  enabled: false
+
+serviceAccount:
+  create: false
+  name: redis-cluster
