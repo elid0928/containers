@@ -13,7 +13,6 @@
 . /opt/pacloud/scripts/libservice.sh
 . /opt/pacloud/scripts/libvalidations.sh
 . /opt/pacloud/scripts/libredis.sh
-
 # Functions
 
 ########################
@@ -163,6 +162,117 @@ redis_cluster_create() {
         create_command="${create_command} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE}"
     fi
     yes yes | $create_command || true
+    if redis_cluster_check "${sockets[0]}"; then
+        echo "Cluster correctly created"
+    else
+        echo "The cluster was already created, the nodes should have recovered it"
+    fi
+}
+
+########################
+# Creates the Redis cluster
+# Globals:
+#   REDIS_*
+# Arguments:
+#   - $@ Array with the hostnames
+# Returns:
+#   None
+#########################
+redis_cluster_create_master() {
+    local nodes=("$@")
+    local sockets=()
+    local wait_command
+    local create_command
+
+    for node in "${nodes[@]}"; do
+        read -r -a host_and_port <<< "$(to_host_and_port "$node")"
+        wait_command="timeout -v 5 redis-cli -h ${host_and_port[0]} -a ${REDIS_PASSWORD} -p ${host_and_port[1]} ping"
+        if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+            wait_command="${wait_command:0:-5} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
+        fi
+        while [[ $($wait_command) != 'PONG' ]]; do
+            echo "Node $node not ready, waiting for all the nodes to be ready..."
+            sleep 1
+        done
+    done
+
+    echo "Waiting ${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}s before querying node ip addresses"
+    sleep "${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}"
+
+    for node in "${nodes[@]}"; do
+        read -r -a host_and_port <<< "$(to_host_and_port "$node")"
+        sockets+=("$(wait_for_dns_lookup "${host_and_port[0]}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}"):${host_and_port[1]}")
+    done
+
+    create_command="redis-cli --cluster create ${sockets[*]} --cluster-yes -a ${REDIS_PASSWORD}"
+    if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+        create_command="${create_command} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE}"
+    fi
+    yes yes | $create_command || true
+    if redis_cluster_check "${sockets[0]}"; then
+        echo "Cluster correctly created"
+    else
+        echo "The cluster was already created, the nodes should have recovered it"
+    fi
+}
+
+redis_cluster_create_slave() {
+
+    local nodes=("$@")
+    local sockets=()
+    local wait_command
+    local create_command
+
+    for node in "${nodes[@]}"; do
+        read -r -a host_and_port <<< "$(to_host_and_port "$node")"
+        wait_command="timeout -v 5 redis-cli -h ${host_and_port[0]} -a ${REDIS_PASSWORD} -p ${host_and_port[1]} ping"
+        if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+            wait_command="${wait_command:0:-5} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE} ping"
+        fi
+        while [[ $($wait_command) != 'PONG' ]]; do
+            echo "Node $node not ready, waiting for all the nodes to be ready..."
+            sleep 1
+        done
+    done
+
+    echo "Waiting ${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}s before querying node ip addresses"
+    sleep "${REDIS_CLUSTER_SLEEP_BEFORE_DNS_LOOKUP}"
+    master_node_id=()
+    echo "run to up for "
+    firstNode=()
+    for node in "${nodes[@]}"; do
+        echo "run on for loop begin"
+        read -r -a host_and_port <<< "$(to_host_and_port "$node")"
+        n=`echo "$node"| cut -d "." -f 1| cut -d "-" -f 4`
+        node_ip_and_port=("$(wait_for_dns_lookup "${host_and_port[0]}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}"):${host_and_port[1]}")
+        echo "run on node_ip_and_port "
+        if [[ $n -eq 0 ]]; then
+            firstNode="$node_ip_and_port"
+        fi
+        if [[ "$(( n % (REDIS_CLUSTER_REPLICAS+1) ))" -eq 0 ]]; then
+            master_ip=$node_ip_and_port
+            master_node_id=`cat /pacloud/redis/data/nodes.conf | grep $master_ip| cut -d " " -f 1`
+            master_rule=`cat /pacloud/redis/data/nodes.conf | grep $master_ip| cut -d " " -f 3`
+            # if [[ $master_rule != 'master' ]]; then
+            #     echo "master_rule is not master"
+            #     exit 1
+            # fi
+            echo "$node is master"
+        else
+            slave_ip=$node_ip_and_port
+            create_command="redis-cli -a $REDIS_PASSWORD --cluster add-node $node_ip_and_port $firstNode --cluster-slave --cluster-master-id $master_node_id"
+            # slave_nodes+=("$node")
+            if is_boolean_yes "$REDIS_TLS_ENABLED"; then
+                create_command="${create_command} --tls --cert ${REDIS_TLS_CERT_FILE} --key ${REDIS_TLS_KEY_FILE} --cacert ${REDIS_TLS_CA_FILE}"
+            fi
+            sockets+=("$(wait_for_dns_lookup "${host_and_port[0]}" "${REDIS_CLUSTER_DNS_LOOKUP_RETRIES}" "${REDIS_CLUSTER_DNS_LOOKUP_SLEEP}"):${host_and_port[1]}")
+            yes yes | $create_command || true
+            echo "slave"
+        fi
+    done
+
+    # create_command="redis-cli --cluster add-node  ${sockets[*]} --cluster-replicas ${REDIS_CLUSTER_REPLICAS} --cluster-yes -a ${REDIS_PASSWORD}"
+    
     if redis_cluster_check "${sockets[0]}"; then
         echo "Cluster correctly created"
     else

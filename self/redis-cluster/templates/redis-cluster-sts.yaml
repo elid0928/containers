@@ -38,6 +38,8 @@ spec:
                   fieldPath: status.podIP
             - name: REDIS_CLUSTER_ANNOUNCE_PORT
               value: "6379"
+            - name: replicas
+              value: "1"
             - name: REDIS_NODES
               value: '{{ $count := .Values.cluster.nodes | int }}{{ range $i, $v := until $count }}{{ include "common.names.fullname" $ }}-{{ $i }}.{{ template "common.names.fullname" $ }}-headless {{ end }}'
             - name: REDIS_CLUSTER_ANNOUNCE_BUS_PORT

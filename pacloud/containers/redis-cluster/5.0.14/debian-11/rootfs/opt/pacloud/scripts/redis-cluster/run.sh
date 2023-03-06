@@ -42,8 +42,18 @@ if is_boolean_yes "$REDIS_CLUSTER_CREATOR" && ! [[ -f "${REDIS_DATA_DIR}/nodes.c
     else
         redis-server "${ARGS[@]}" &
     fi
+    master_nodes=()
+    for node in "${nodes[@]}"; do
+        n=`echo "$node"| cut -d "." -f 1| cut -d "-" -f 4`
+        if [ "$(( n % (replicas+1) ))" -eq 0 ]; then
+            master_nodes+=("$node")
+            echo "$node is master"
+        fi
+    done
     # Create the cluster
-    redis_cluster_create "${nodes[@]}"
+    redis_cluster_create_master  "${master_nodes[@]}"
+    redis_cluster_create_slave "${nodes[@]}"
+    # redis_cluster_create "${nodes[@]}"
     # Bring redis process to foreground
     fg
 else
