@@ -1,0 +1,86 @@
+#!/bin/bash
+#
+# Library for network functions
+
+# shellcheck disable=SC1091
+
+# Load Generic Libraries
+. /opt/pacloud/scripts/liblog.sh
+
+# Functions
+
+########################
+# Resolve IP address for a host/domain (i.e. DNS lookup)
+# Arguments:
+#   $1 - Hostname to resolve
+#   $2 - IP address version (v4, v6), leave empty for resolving to any version
+# Returns:
+#   IP
+#########################
+dns_lookup() {
+    local host="${1:?host is missing}"
+    local ip_version="${2:-}"
+    getent "ahosts${ip_version}" "$host" | awk '/STREAM/ {print $1 }' | head -n 1
+}
+
+#########################
+# Wait for a hostname and return the IP
+# Arguments:
+#   $1 - hostname
+#   $2 - number of retries
+#   $3 - seconds to wait between retries
+# Returns:
+#   - IP address that corresponds to the hostname
+#########################
+wait_for_dns_lookup() {
+    local hostname="${1:?hostname is missing}"
+    local retries="${2:-5}"
+    local seconds="${3:-1}"
+    check_host() {
+        if [[ $(dns_lookup "$hostname") == "" ]]; then
+            false
+        else
+            true
+        fi
+    }
+    # Wait for the host to be ready
+    retry_while "check_host ${hostname}" "$retries" "$seconds"
+    dns_lookup "$hostname"
+}
+
+########################
+# Get machine's IP
+# Arguments:
+#   None
+# Returns:
+#   Machine IP
+#########################
+get_machine_ip() {
+    local -a ip_addresses
+    local hostname
+    hostname="$(hostname)"
+    read -r -a ip_addresses <<< "$(dns_lookup "$hostname" | xargs echo)"
+    if [[ "${#ip_addresses[@]}" -gt 1 ]]; then
+        warn "Found more than one IP address associated to hostname ${hostname}: ${ip_addresses[*]}, will use ${ip_addresses[0]}"
+    elif [[ "${#ip_addresses[@]}" -lt 1 ]]; then
+        error "Could not find any IP address associated to hostname ${hostname}"
+        exit 1
+    fi
+    echo "${ip_addresses[0]}"
+}
+
+########################
+# Check if the provided argument is a resolved hostname
+# Arguments:
+#   $1 - Value to check
+# Returns:
+#   Boolean
+#########################
+is_hostname_resolved() {
+    local -r host="${1:?missing value}"
+    if [[ -n "$(dns_lookup "$host")" ]]; then
+        true
+    else
+        false
+    fi
+}
