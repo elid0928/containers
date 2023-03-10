@@ -20,6 +20,9 @@ spec:
         app.kubernetes.io/name: {{ .Release.Name }}
         app.kubernetes.io/instance: {{ .Release.Name }}-redis-cluster
     spec:
+    {{- if .Values.rbac.create }}
+      serviceAccountName: {{ include "redis-cluster.serviceAccountName" . }}
+    {{- end }}
       imagePullSecrets:
         - name: defaultdocker
       containers:
@@ -46,20 +49,20 @@ spec:
               value: "16379"
             - name: REDIS_CLUSTER_REPLICAS
               value: "1"
-            - name: REDIS_CLUSTER_DNS
-              value: "cluster-srv"
-            - name: REDIS_CLUSTER_DNS_TTL
-              value: "30"
-            - name: REDIS_CLUSTER_DNS_REFRESH
-              value: "10"
-            - name: REDIS_CLUSTER_DNS_RETRIES
-              value: "5"
-            - name: REDIS_CLUSTER_DNS_TIMEOUT
-              value: "2"
-            - name: REDIS_CLUSTER_DNS_NOT_FOUND_TTL
-              value: "15"
-            - name: REDIS_CLUSTER_DNS_UPDATE_INTERVAL
-              value: "60"
+            # - name: REDIS_CLUSTER_DNS
+            #   value: "cluster-srv"
+            # - name: REDIS_CLUSTER_DNS_TTL
+            #   value: "30"
+            # - name: REDIS_CLUSTER_DNS_REFRESH
+            #   value: "10"
+            # - name: REDIS_CLUSTER_DNS_RETRIES
+            #   value: "5"
+            # - name: REDIS_CLUSTER_DNS_TIMEOUT
+            #   value: "2"
+            # - name: REDIS_CLUSTER_DNS_NOT_FOUND_TTL
+            #   value: "15"
+            # - name: REDIS_CLUSTER_DNS_UPDATE_INTERVAL
+            #   value: "60"
             - name: POD_NAME
               valueFrom:
                 fieldRef:
@@ -98,6 +101,13 @@ spec:
             # name: redis-tmp-conf
           - mountPath: /pacloud/redis/data
             name: redis-data
+          - name: default-config
+            mountPath: /opt/pacloud/redis/etc/redis-default.conf
+            subPath: redis-default.conf
+      volumes:
+      - name: default-config
+        configMap:
+            name: {{ include "common.names.fullname" . }}-default
 
   volumeClaimTemplates:
   - metadata:

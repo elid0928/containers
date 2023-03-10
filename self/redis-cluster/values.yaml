@@ -1,7 +1,7 @@
 image:
   #repository: redis-cluster
   repository: dongdongqiang/redis-cluster
-  tag: 4.6
+  tag: release-1
   pullPolicy: IfNotPresent
   imagePullSecrets: defaultdocker
 global:
@@ -15,7 +15,7 @@ global:
   redis:
     password: ""
 cluster:
-  nodes: 10
+  nodes: 6
   init: "true"
   replicas: 1
   update:
@@ -25,6 +25,31 @@ cluster:
   externalAccess:
     enabled: false
 
+redis:
+
+# 而 podManagementPolicy 参数可以控制 StatefulSet 中管理 Pod 的策略，有两种可选值：Parallel 和 OrderedReady。
+# Parallel 表示实例化多个 Pod 的顺序是并行的（即同时创建多个 Pod），不需要等待之前的 Pod 创建完成。
+# OrderedReady 表示实例化多个 Pod 的顺序是有序的，并且之后的 Pod 的启动需要等待之前的 Pod 启动成功以后再进行。
+# 
+# podManagementPolicy:
+#   - Parallel
+  defaultConfigOverride: ""
+    # cluster-enabled: "yes"
+    # cluster-config-file: "nodes.conf"
+    # cluster-node-timeout: 5000
+    # appendonly: "yes"
+    # appendfsync: "everysec"
+    # no-appendfsync-on-rewrite: "no"
+    # auto-aof-rewrite-percentage: 100
+    # auto-aof-rewrite-min-size: 64mb
+    # aof-load-truncated: "yes"
+    # aof-use-rdb-preamble: "yes"
+    # rdbchecksum: "yes"
+    # rdbcompression: "yes"
+rbac:
+  create: false
+  role:
+    rules: ""
 usePassword: true
 
 diagnosticMode:
@@ -45,4 +70,8 @@ containerSecurityContext:
 
 serviceAccount:
   create: false
+  name: redis-cluster
+
+podSecurityPolicy:
+  enabled: false
   name: redis-cluster
