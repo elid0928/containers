@@ -123,40 +123,12 @@ spec:
                   redis-cli -a $REDISCLI_AUTH --cluster fix "${firstNodeIP}:${REDIS_PORT_NUMBER}"
                 done
               done
-
-              
-
           {{- end }}
           env:
             - name: PACLOUD_DEBUG
               value: {{ ternary "true" "false" (or .Values.image.debug .Values.diagnosticMode.enabled) | quote }}
-            {{- if .Values.cluster.externalAccess.enabled }}
-            {{- if .Values.tls.enabled }}
-            - name:  REDIS_TLS_CERT_FILE
-              value: {{ template "redis-cluster.tlsCert" . }}
-            - name:  REDIS_TLS_KEY_FILE
-              value: {{ template "redis-cluster.tlsCertKey" . }}
-            - name:  REDIS_TLS_CA_FILE
-              value: {{ template "redis-cluster.tlsCACert" . }}
-            - name: REDIS_TLS_PORT_NUMBER
-            {{- else }}
             - name: REDIS_PORT_NUMBER
-            {{- end }}
-              value: {{ .Values.cluster.externalAccess.service.port | quote }}
-            {{- else }}
-            {{- if .Values.tls.enabled }}
-            - name:  REDIS_TLS_CERT_FILE
-              value: {{ template "redis-cluster.tlsCert" . }}
-            - name:  REDIS_TLS_KEY_FILE
-              value: {{ template "redis-cluster.tlsCertKey" . }}
-            - name:  REDIS_TLS_CA_FILE
-              value: {{ template "redis-cluster.tlsCACert" . }}
-            - name: REDIS_TLS_PORT_NUMBER
-            {{- else }}
-            - name: REDIS_PORT_NUMBER
-            {{- end }}
               value: "6379"
-            {{- end }}
             - name: REDIS_CLUSTER_REPLICAS
               value: {{ .Values.cluster.replicas | quote }}
             {{- if .Values.usePassword }}
@@ -195,13 +167,8 @@ spec:
             {{- end }}
           {{- end }}
       restartPolicy: OnFailure
-      {{- if or .Values.tls.enabled .Values.updateJob.extraVolumes }}
+      {{- if  .Values.updateJob.extraVolumes }}
       volumes:
-      {{- if .Values.tls.enabled }}
-        - name: redis-certificates
-          secret:
-            secretName: {{ include "common.tplvalues.render" (dict "value" .Values.tls.certificatesSecret "context" $) }}
-      {{- end }}
       {{- if .Values.updateJob.extraVolumes }}
       {{- include "common.tplvalues.render" (dict "value" .Values.updateJob.extraVolumes "context" $) | nindent 6 }}
       {{- end }}

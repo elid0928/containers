@@ -19,12 +19,31 @@ spec:
       labels:
         app.kubernetes.io/name: {{ .Release.Name }}
         app.kubernetes.io/instance: {{ .Release.Name }}-redis-cluster
+        app: redis-cluster
     spec:
     {{- if .Values.rbac.create }}
       serviceAccountName: {{ include "redis-cluster.serviceAccountName" . }}
     {{- end }}
       imagePullSecrets:
         - name: defaultdocker
+      
+      affinity:
+      {{- if .Values.redis.affinity.podAffinity.enabled }}
+        podAffinity: {{- omit .Values.redis.affinity.podAffinity "enabled" | toYaml | nindent 10 }}
+      {{- end }}
+      {{- if .Values.redis.affinity.podAntiAffinity.enabled }}
+        podAntiAffinity: {{- omit .Values.redis.affinity.podAntiAffinity "enabled" | toYaml | nindent 10 }}
+      {{- end }}
+      {{- if .Values.redis.affinity.nodeAffinity.enabled }}
+        nodeAffinity: {{- omit .Values.redis.affinity.nodeAffinity "enabled" | toYaml | nindent 10 }}
+      {{- end }}
+      {{- if .Values.redis.nodeSelector }}
+      nodeSelector: 
+      {{ toYaml .Values.redis.nodeSelector | indent 8 }}
+      {{- end }}
+      {{- if .Values.redis.tolerations }}
+      tolerations: {{- include "common.tplvalues.render" (dict "value" .Values.redis.tolerations "context" $) | nindent 8 }}
+      {{- end }}
       containers:
         - name: redis-cluster
           image: {{ .Values.image.repository}}:{{ .Values.image.tag }}
@@ -49,24 +68,41 @@ spec:
               value: "16379"
             - name: REDIS_CLUSTER_REPLICAS
               value: "1"
-            # - name: REDIS_CLUSTER_DNS
-            #   value: "cluster-srv"
-            # - name: REDIS_CLUSTER_DNS_TTL
-            #   value: "30"
-            # - name: REDIS_CLUSTER_DNS_REFRESH
-            #   value: "10"
-            # - name: REDIS_CLUSTER_DNS_RETRIES
-            #   value: "5"
-            # - name: REDIS_CLUSTER_DNS_TIMEOUT
-            #   value: "2"
-            # - name: REDIS_CLUSTER_DNS_NOT_FOUND_TTL
-            #   value: "15"
-            # - name: REDIS_CLUSTER_DNS_UPDATE_INTERVAL
-            #   value: "60"
             - name: POD_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+          {{- if .Values.redis.resources }}
+          resources:
+          {{- include "common.tplvalues.render" (dict "value" .Values.redis.resources "context" $) | nindent 12 }}
+          {{- end }}
+
+          {{- if .Values.redis.livenessProbe.enabled }}
+          livenessProbe:
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - /scripts/ping_liveness_local.sh {{ .Values.redis.livenessProbe.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.redis.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.redis.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.redis.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.redis.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.redis.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.redis.readinessProbe.enabled }}
+          readinessProbe:
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - /scripts/ping_readiness_local.sh {{ .Values.redis.readinessProbe.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.redis.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.redis.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.redis.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.redis.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.redis.readinessProbe.failureThreshold }}
+          {{- end }}
           # resources:
           #   requests:
           #     memory: 256Mi

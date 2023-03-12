@@ -25,7 +25,75 @@ cluster:
   externalAccess:
     enabled: false
 
+
+
 redis:
+  resource:
+    requests:
+      cpu: 256m
+      memory: 250Mi
+    limits:
+      cpu: 512m
+      memory: 512Mi
+  affinity:
+    nodeAffinity:
+      enabled: true
+      # requiredDuringSchedulingIgnoredDuringExecution:
+      #   nodeSelectorTerms:
+      #   - matchExpressions:
+      #     - key: topology.kubernetes.io/database-type
+      #       operator: In
+      #       values:
+      #       - mysql
+      #       - redis-cluster
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: In
+            values:
+            - us-central1-c
+    podAffinity:
+      enabled: true
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - redis-cluster
+          topologyKey: kubernetes.io/hostname
+    podAntiAffinity:
+      enabled: false
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - redis-cluster
+        topologyKey: kubernetes.io/hostname
+  readinessProbe:
+    enabled: false
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 3
+  livenessProbe:
+    enabled: false
+    initialDelaySeconds: 15
+    periodSeconds: 10
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 3
+  nodeSelector:
+    cass_cluster: "redis-cluster"
+    hostcluster: "144"
+  tolerations: []
 
 # 而 podManagementPolicy 参数可以控制 StatefulSet 中管理 Pod 的策略，有两种可选值：Parallel 和 OrderedReady。
 # Parallel 表示实例化多个 Pod 的顺序是并行的（即同时创建多个 Pod），不需要等待之前的 Pod 创建完成。
