@@ -205,33 +205,6 @@ redis_validate() {
             print_validation_error "Invalid replication mode. Available options are 'master/replica'"
         fi
     fi
-    if is_boolean_yes "$REDIS_TLS_ENABLED"; then
-        if [[ "$REDIS_PORT_NUMBER" == "$REDIS_TLS_PORT_NUMBER" ]] && [[ "$REDIS_PORT_NUMBER" != "6379" ]]; then
-            # If both ports are assigned the same numbers and they are different to the default settings
-            print_validation_error "Environment variables REDIS_PORT_NUMBER and REDIS_TLS_PORT_NUMBER point to the same port number (${REDIS_PORT_NUMBER}). Change one of them or disable non-TLS traffic by setting REDIS_PORT_NUMBER=0"
-        fi
-        if [[ -z "$REDIS_TLS_CERT_FILE" ]]; then
-            print_validation_error "You must provide a X.509 certificate in order to use TLS"
-        elif [[ ! -f "$REDIS_TLS_CERT_FILE" ]]; then
-            print_validation_error "The X.509 certificate file in the specified path ${REDIS_TLS_CERT_FILE} does not exist"
-        fi
-        if [[ -z "$REDIS_TLS_KEY_FILE" ]]; then
-            print_validation_error "You must provide a private key in order to use TLS"
-        elif [[ ! -f "$REDIS_TLS_KEY_FILE" ]]; then
-            print_validation_error "The private key file in the specified path ${REDIS_TLS_KEY_FILE} does not exist"
-        fi
-        if [[ -n "$REDIS_TLS_KEY_FILE_PASS" ]] && [[ ! -f "$REDIS_TLS_KEY_FILE_PASS" ]]; then
-            print_validation_error "The passphrase for the private key file in the specified path ${REDIS_TLS_KEY_FILE_PASS} does not exist"
-        fi
-        if [[ -z "$REDIS_TLS_CA_FILE" ]]; then
-            print_validation_error "You must provide a CA X.509 certificate in order to use TLS"
-        elif [[ ! -f "$REDIS_TLS_CA_FILE" ]]; then
-            print_validation_error "The CA X.509 certificate file in the specified path ${REDIS_TLS_CA_FILE} does not exist"
-        fi
-        if [[ -n "$REDIS_TLS_DH_PARAMS_FILE" ]] && [[ ! -f "$REDIS_TLS_DH_PARAMS_FILE" ]]; then
-            print_validation_error "The DH param file in the specified path ${REDIS_TLS_DH_PARAMS_FILE} does not exist"
-        fi
-    fi
 
     [[ "$error_code" -eq 0 ]] || exit "$error_code"
 }

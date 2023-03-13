@@ -2,14 +2,6 @@ FROM debian:stable-slim
 
 ARG TARGETARCH
 
-LABEL org.opencontainers.image.authors="https://pacloud.com/contact" \
-      org.opencontainers.image.description="Application packaged by Pacloud" \
-      org.opencontainers.image.licenses="Apache-2.0" \
-      org.opencontainers.image.ref.name="6.2.10-debian-11-r10" \
-      org.opencontainers.image.source="https://github.com/pacloud/containers/tree/main/pacloud/redis-cluster" \
-      org.opencontainers.image.title="redis-cluster" \
-      org.opencontainers.image.vendor="VMware, Inc." \
-      org.opencontainers.image.version="6.2.10"
 
 ENV HOME="/" \
     OS_ARCH="${TARGETARCH:-amd64}" \
@@ -24,20 +16,7 @@ COPY prebuildfs /
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Install required system packages and dependencies
 RUN install_packages ca-certificates curl libssl1.1 procps make gcc libc-dev
-# RUN mkdir -p /tmp/pacloud/pkg/cache/ && cd /tmp/pacloud/pkg/cache/ && \
-#     COMPONENTS=( \
-#       "redis-5.0.14-0-linux-${OS_ARCH}-debian-11" \
-#       "gosu-1.16.0-1-linux-${OS_ARCH}-debian-11" \
-#     ) && \
-#     for COMPONENT in "${COMPONENTS[@]}"; do \
-#       if [ ! -f "${COMPONENT}.tar.gz" ]; then \
-#         curl -SsLf "https://downloads.pacloud.com/files/stacksmith/${COMPONENT}.tar.gz" -O ; \
-#         curl -SsLf "https://downloads.pacloud.com/files/stacksmith/${COMPONENT}.tar.gz.sha256" -O ; \
-#       fi && \
-#       sha256sum -c "${COMPONENT}.tar.gz.sha256" && \
-#       tar -zxf "${COMPONENT}.tar.gz" -C /opt/pacloud --strip-components=2 --no-same-owner --wildcards '*/files' && \
-#       rm -rf "${COMPONENT}".tar.gz{,.sha256} ; \
-#     done
+
 RUN mkdir -p /tmp/pacloud/pkg/cache/ && cd /tmp/pacloud/pkg/cache/ && \
       curl -SsLf "https://download.redis.io/releases/redis-5.0.14.tar.gz" -O && \
       curl -SsLf "https://github.com/tianon/gosu/releases/download/1.16/gosu-amd64" -O && \
